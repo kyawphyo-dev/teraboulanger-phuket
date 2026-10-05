@@ -154,7 +154,7 @@ export default function AnnouncementBar() {
 
   return (
     <div
-      className="relative w-full bg-espresso overflow-hidden"
+      className="relative w-full bg-orange overflow-hidden"
       role="region"
       aria-label="Announcements"
       onMouseEnter={() => setIsPaused(true)}
@@ -163,11 +163,11 @@ export default function AnnouncementBar() {
       onBlurCapture={() => setIsPaused(false)}
     >
       <div
-        className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-espresso to-transparent z-10 pointer-events-none"
+        className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-orange to-transparent z-10 pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-espresso to-transparent z-10 pointer-events-none"
+        className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-orange to-transparent z-10 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -204,11 +204,11 @@ export default function AnnouncementBar() {
                       >
                         {a.icon}
                       </span>
-                      <p className="text-[12px] sm:text-[13px] leading-tight text-cream/90 font-medium text-center whitespace-nowrap sm:whitespace-normal overflow-hidden text-ellipsis">
+                      <p className="text-[12px] sm:text-[13px] leading-tight text-ivory/92 font-medium text-center whitespace-nowrap sm:whitespace-normal overflow-hidden text-ellipsis">
                         {a.text}
                         <a
                           href={a.cta.href}
-                          className="ml-2.5 inline-flex items-center text-gold font-semibold hover:text-gold-light transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-1 focus-visible:ring-offset-espresso rounded-sm whitespace-nowrap"
+                          className="ml-2.5 inline-flex items-center text-white font-semibold hover:text-peach-light transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-orange rounded-sm whitespace-nowrap"
                         >
                           {a.cta.label}
                           <span
@@ -230,9 +230,15 @@ export default function AnnouncementBar() {
             type="button"
             onClick={() => setIsDismissed(true)}
             aria-label="Dismiss announcements bar"
-            className="relative z-20 shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full text-cream/55 hover:text-cream hover:bg-cream/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-espresso"
+            className="relative z-20 shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full text-ivory/70 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M6 6L18 18M18 6L6 18"
                 stroke="currentColor"
@@ -252,7 +258,7 @@ export default function AnnouncementBar() {
             transform: scale(1);
           }
           50% {
-            opacity: 0.6;
+            opacity: 0.55;
             transform: scale(0.92);
           }
         }

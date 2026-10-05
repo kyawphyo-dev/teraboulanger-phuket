@@ -1,29 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf7f2;
-  --foreground: #2a2118;
-  --cream: #faf7f2;
-  --cream-dark: #f2ede4;
-  --espresso: #2a2118;
-  --espresso-light: #4a3c30;
-  --gold: #b8906a;
-  --gold-light: #d4b28a;
-  --gold-dark: #9c7650;
-  --rose: #c9a090;
+  /* =========================================================
+     TERABOULANGER — UNIFIED DESIGN SYSTEM
+     Contemporary French bakery · Phuket
+
+     Core balance:
+       60-65% warm ivory/cream
+       20-25% burnt orange  #AF572A
+       8-10%  dark brown    #2F241D
+       3-5%  peach accents
+       1-2%  gold / soft blue decorative
+     ========================================================= */
+
+  /* Canvas */
+  --background: #fcf7eb;
+  --foreground: #2f241d;
+
+  /* Warm neutrals */
+  --ivory: #fcf7eb;
+  --cream: #ede9e2;
+  --cream-dark: #ded8ce;
+  --paper: #f7f1e5;
+
+  /* PRIMARY BRAND — burnt orange */
+  --orange: #d75413;
+  --orange-dark: #98481f;
+  --orange-light: #be6a3b;
+
+  /* Supporting soft peach */
+  --peach: #d9a486;
+  --peach-light: #e7c4ae;
+  --peach-dark: #b97a5b;
+
+  /* Typography — dark chocolate brown */
+  --brown: #2f241d;
+  --brown-light: #5d4637;
+  --brown-muted: #806a5a;
+
+  /* Accent gold / caramel — use sparingly */
+  --gold: #c68a3a;
+  --gold-light: #d9a65d;
+  --gold-dark: #a96e26;
+
+  /* Soft blue — illustration accents only */
+  --blue: #b9cdd5;
+  --blue-light: #dde7ea;
+  --blue-dark: #91aab4;
+
+  /* Pure UI */
+  --white: #ffffff;
+  --black: #171411;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-ivory: var(--ivory);
   --color-cream: var(--cream);
   --color-cream-dark: var(--cream-dark);
-  --color-espresso: var(--espresso);
-  --color-espresso-light: var(--espresso-light);
+  --color-paper: var(--paper);
+
+  --color-orange: var(--orange);
+  --color-orange-dark: var(--orange-dark);
+  --color-orange-light: var(--orange-light);
+
+  --color-peach: var(--peach);
+  --color-peach-light: var(--peach-light);
+  --color-peach-dark: var(--peach-dark);
+
+  --color-brown: var(--brown);
+  --color-brown-light: var(--brown-light);
+  --color-brown-muted: var(--brown-muted);
+
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-gold-dark: var(--gold-dark);
-  --color-rose: var(--rose);
+
+  --color-blue: var(--blue);
+  --color-blue-light: var(--blue-light);
+  --color-blue-dark: var(--blue-dark);
+
+  --color-white: var(--white);
+  --color-black: var(--black);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
@@ -32,5 +93,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
