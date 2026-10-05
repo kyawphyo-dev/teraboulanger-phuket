@@ -47,8 +47,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-cream/85 backdrop-blur-md border-b border-gold/15 shadow-[0_1px_20px_-12px_rgba(42,33,24,0.15)]"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-ivory/90 backdrop-blur-md border-b border-cream-dark shadow-[0_1px_20px_-14px_rgba(47,36,29,0.18)]"
+          : "bg-ivory border-b border-transparent"
       }`}
     >
       <nav
@@ -58,50 +58,59 @@ export default function Navbar() {
         <div className="flex h-16 sm:h-20 items-center justify-between">
           <Link
             href="/"
-            className="group flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded-sm"
+            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory rounded-sm"
             aria-label="Teraboulanger Phuket — Home"
           >
             <span
               aria-hidden="true"
-              className="text-gold text-xl transition-transform duration-300 group-hover:rotate-12"
+              className="text-orange transition-transform duration-300 group-hover:-rotate-6"
             >
               <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
+                width="28"
+                height="28"
+                viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12H3Z"
+                  d="M4 18C4 11.37 9.37 6 16 6C22.63 6 28 11.37 28 18C28 21.31 26.65 24.29 24.42 26.23C22.09 25.7 19.15 25.4 16 25.4C12.85 25.4 9.91 25.7 7.58 26.23C5.35 24.29 4 21.31 4 18Z"
                   fill="currentColor"
                 />
                 <path
-                  d="M3.5 14H20.5C20.5 18.1421 17.1421 21 13 21H11C6.85786 21 3.5 18.1421 3.5 14Z"
-                  fill="currentColor"
+                  d="M8 16C9 15.2 10.5 14.7 12 14.7C13.5 14.7 14.6 15 16 15.9C17.4 15 18.5 14.7 20 14.7C21.5 14.7 23 15.2 24 16"
+                  stroke="#FCF7EB"
+                  strokeWidth="1.1"
+                  strokeLinecap="round"
+                  opacity="0.78"
+                />
+                <path
+                  d="M10.5 11L12.5 13M21.5 11L19.5 13"
+                  stroke="#FCF7EB"
+                  strokeWidth="1.1"
+                  strokeLinecap="round"
                   opacity="0.6"
                 />
               </svg>
             </span>
             <div className="flex flex-col leading-none">
-              <span className="font-serif text-xl sm:text-2xl font-semibold text-espresso tracking-tight">
+              <span className="font-serif text-xl sm:text-[22px] font-semibold text-brown tracking-tight">
                 Teraboulanger
               </span>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-gold font-medium pl-0.5">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.28em] text-orange font-semibold pl-0.5 pt-1">
                 Phuket
               </span>
             </div>
           </Link>
 
-          <ul className="hidden lg:flex items-center justify-center gap-1 xl:gap-2">
+          <ul className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1.5">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="relative px-4 py-2 text-sm font-medium text-espresso/85 hover:text-espresso transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded group"
+                  className="relative px-4 py-2 text-[14px] font-medium text-brown/85 hover:text-orange transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory rounded group"
                 >
                   {link.label}
-                  <span className="absolute left-1/2 -bottom-0.5 h-px w-0 -translate-x-1/2 bg-gold transition-all duration-300 ease-out group-hover:w-6" />
+                  <span className="absolute left-1/2 -bottom-0.5 h-[1.5px] w-0 -translate-x-1/2 bg-orange transition-all duration-300 ease-out group-hover:w-7" />
                 </Link>
               </li>
             ))}
@@ -110,7 +119,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-white shadow-[0_1px_2px_rgba(42,33,24,0.06)] transition-all duration-250 ease-out hover:bg-gold-dark hover:shadow-[0_4px_16px_-4px_rgba(184,144,106,0.55)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-espresso focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-2.5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-orange-dark active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
             >
               Visit Us
             </Link>
@@ -122,7 +131,7 @@ export default function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="lg:hidden relative z-50 inline-flex h-11 w-11 items-center justify-center rounded-full text-espresso hover:bg-espresso/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+            className="lg:hidden relative z-50 inline-flex h-11 w-11 items-center justify-center rounded-full text-brown hover:bg-orange/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
           >
             <span className="sr-only">
               {isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -153,45 +162,58 @@ export default function Navbar() {
           aria-modal="true"
           aria-label="Mobile navigation"
           className={`lg:hidden fixed inset-0 z-40 transition-opacity duration-300 ease-out ${
-            isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            isMenuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           }`}
         >
           <div
-            className="absolute inset-0 bg-espresso/20 backdrop-blur-sm"
+            className="absolute inset-0 bg-brown/25 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
             aria-hidden="true"
           />
           <div
-            className={`absolute inset-x-0 top-0 bg-cream shadow-[0_20px_60px_-20px_rgba(42,33,24,0.25)] transition-all duration-350 ease-out ${
+            className={`absolute inset-x-0 top-0 bg-ivory shadow-[0_20px_60px_-20px_rgba(47,36,29,0.28)] border-b border-cream-dark transition-all duration-350 ease-out ${
               isMenuOpen
                 ? "translate-y-0 opacity-100"
                 : "-translate-y-4 opacity-0"
             }`}
           >
-            <div className="pt-20 pb-8 px-5 sm:px-8 border-b border-gold/10">
+            <div className="pt-20 pb-8 px-5 sm:px-8">
               <ul className="flex flex-col">
                 {NAV_LINKS.map((link, index) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`group flex items-center justify-between py-4 border-b border-espresso/5 last:border-b-0 transition-all duration-300 ${
-                        isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+                      className={`group flex items-center justify-between py-4 border-b border-cream-dark last:border-b-0 transition-all duration-300 ${
+                        isMenuOpen
+                          ? "opacity-100 translate-x-0"
+                          : "opacity-0 -translate-x-2"
                       }`}
-                      style={{ transitionDelay: isMenuOpen ? `${index * 50 + 50}ms` : "0ms" }}
+                      style={{
+                        transitionDelay: isMenuOpen
+                          ? `${index * 50 + 50}ms`
+                          : "0ms",
+                      }}
                     >
-                      <span className="text-lg font-medium text-espresso group-hover:text-gold-dark transition-colors duration-200">
+                      <span className="text-[17px] font-medium text-brown group-hover:text-orange transition-colors duration-200">
                         {link.label}
                       </span>
                       <span
                         aria-hidden="true"
-                        className="text-gold/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gold"
+                        className="text-orange/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-orange"
                       >
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
                           <path
                             d="M9 6L15 12L9 18"
                             stroke="currentColor"
-                            strokeWidth="1.5"
+                            strokeWidth="1.8"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
@@ -203,19 +225,21 @@ export default function Navbar() {
               </ul>
               <div
                 className={`mt-8 transition-all duration-300 ${
-                  isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                  isMenuOpen
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-2"
                 }`}
                 style={{ transitionDelay: isMenuOpen ? "350ms" : "0ms" }}
               >
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-gold px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-all duration-250 ease-out hover:bg-gold-dark hover:shadow-[0_6px_20px_-6px_rgba(184,144,106,0.55)] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-espresso focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                  className="block w-full rounded-full bg-orange px-6 py-3.5 text-[16px] font-semibold text-center text-white transition-colors duration-200 hover:bg-orange-dark active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
                 >
                   Visit Us
                 </Link>
-                <p className="mt-4 text-center text-xs text-espresso/50 tracking-wide">
-                  Artisan bakery — Phuket, Thailand
+                <p className="mt-4 text-center text-xs text-brown-muted tracking-wide">
+                  Maison · Boulangerie · Phuket
                 </p>
               </div>
             </div>
