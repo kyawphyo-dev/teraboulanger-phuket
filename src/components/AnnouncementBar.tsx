@@ -200,7 +200,7 @@ export default function AnnouncementBar() {
                     <div className="flex items-center justify-center gap-2.5 sm:gap-3 min-w-0">
                       <span
                         aria-hidden="true"
-                        className="shrink-0 text-gold animate-[twinkle_2.6s_ease-in-out_infinite]"
+                        className="shrink-0 text-peach-light animate-[twinkle_2.6s_ease-in-out_infinite]"
                       >
                         {a.icon}
                       </span>
@@ -208,12 +208,12 @@ export default function AnnouncementBar() {
                         {a.text}
                         <a
                           href={a.cta.href}
-                          className="ml-2.5 inline-flex items-center text-white font-semibold hover:text-peach-light transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-orange rounded-sm whitespace-nowrap"
+                          className="group/link ml-2.5 inline-flex items-center text-ivory font-semibold hover:text-peach-light transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach-light focus-visible:ring-offset-1 focus-visible:ring-offset-orange rounded-sm whitespace-nowrap"
                         >
                           {a.cta.label}
                           <span
                             aria-hidden="true"
-                            className="ml-0.5 inline-block transition-transform duration-200 hover:translate-x-0.5"
+                            className="ml-1 inline-block transition-all duration-200 group-hover/link:translate-x-0.5 text-peach-light"
                           >
                             →
                           </span>
@@ -230,7 +230,7 @@ export default function AnnouncementBar() {
             type="button"
             onClick={() => setIsDismissed(true)}
             aria-label="Dismiss announcements bar"
-            className="relative z-20 shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full text-ivory/70 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange"
+            className="relative z-20 shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full text-ivory/75 hover:text-ivory hover:bg-ivory/12 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach-light focus-visible:ring-offset-2 focus-visible:ring-offset-orange"
           >
             <svg
               width="14"
