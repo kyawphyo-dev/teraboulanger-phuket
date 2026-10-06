@@ -47,8 +47,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-ivory/90 backdrop-blur-md border-b border-cream-dark shadow-[0_1px_20px_-14px_rgba(47,36,29,0.18)]"
-          : "bg-ivory border-b border-transparent"
+          ? "bg-brown/92 backdrop-blur-md border-b border-ivory/10 shadow-[0_1px_24px_-12px_rgba(0,0,0,0.55)]"
+          : "bg-brown border-b border-transparent"
       }`}
     >
       <nav
@@ -58,7 +58,7 @@ export default function Navbar() {
         <div className="flex h-16 sm:h-20 items-center justify-between">
           <Link
             href="/"
-            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory rounded-sm"
+            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
             aria-label="Teraboulanger Phuket — Home"
           >
             <span
@@ -93,10 +93,10 @@ export default function Navbar() {
               </svg>
             </span>
             <div className="flex flex-col leading-none">
-              <span className="font-serif text-xl sm:text-[22px] font-semibold text-brown tracking-tight">
+              <span className="font-serif text-xl sm:text-[22px] font-semibold text-ivory tracking-tight">
                 Teraboulanger
               </span>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.28em] text-orange font-semibold pl-0.5 pt-1">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.28em] text-peach font-semibold pl-0.5 pt-1">
                 Phuket
               </span>
             </div>
@@ -107,10 +107,10 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="relative px-4 py-2 text-[14px] font-medium text-brown/85 hover:text-orange transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory rounded group"
+                  className="relative px-4 py-2 text-[14px] font-medium text-ivory/85 hover:text-peach transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded group"
                 >
                   {link.label}
-                  <span className="absolute left-1/2 -bottom-0.5 h-[1.5px] w-0 -translate-x-1/2 bg-orange transition-all duration-300 ease-out group-hover:w-7" />
+                  <span className="absolute left-1/2 -bottom-0.5 h-[1.5px] w-0 -translate-x-1/2 bg-peach transition-all duration-300 ease-out group-hover:w-7" />
                 </Link>
               </li>
             ))}
@@ -119,7 +119,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-2.5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-orange-dark active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+              className="inline-flex items-center justify-center rounded-full bg-orange px-6 py-2.5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-orange-dark active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
             >
               Visit Us
             </Link>
@@ -131,7 +131,7 @@ export default function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="lg:hidden relative z-50 inline-flex h-11 w-11 items-center justify-center rounded-full text-brown hover:bg-orange/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+            className="lg:hidden relative z-50 inline-flex h-11 w-11 items-center justify-center rounded-full text-ivory hover:bg-orange/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
           >
             <span className="sr-only">
               {isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -168,12 +168,12 @@ export default function Navbar() {
           }`}
         >
           <div
-            className="absolute inset-0 bg-brown/25 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
             aria-hidden="true"
           />
           <div
-            className={`absolute inset-x-0 top-0 bg-ivory shadow-[0_20px_60px_-20px_rgba(47,36,29,0.28)] border-b border-cream-dark transition-all duration-350 ease-out ${
+            className={`absolute inset-x-0 top-0 bg-brown shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)] border-b border-ivory/10 transition-all duration-350 ease-out ${
               isMenuOpen
                 ? "translate-y-0 opacity-100"
                 : "-translate-y-4 opacity-0"
@@ -186,7 +186,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`group flex items-center justify-between py-4 border-b border-cream-dark last:border-b-0 transition-all duration-300 ${
+                      className={`group flex items-center justify-between py-4 border-b border-ivory/10 last:border-b-0 transition-all duration-300 ${
                         isMenuOpen
                           ? "opacity-100 translate-x-0"
                           : "opacity-0 -translate-x-2"
@@ -197,12 +197,12 @@ export default function Navbar() {
                           : "0ms",
                       }}
                     >
-                      <span className="text-[17px] font-medium text-brown group-hover:text-orange transition-colors duration-200">
+                      <span className="text-[17px] font-medium text-ivory group-hover:text-peach transition-colors duration-200">
                         {link.label}
                       </span>
                       <span
                         aria-hidden="true"
-                        className="text-orange/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-orange"
+                        className="text-peach/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-peach"
                       >
                         <svg
                           width="18"
@@ -234,11 +234,11 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full rounded-full bg-orange px-6 py-3.5 text-[16px] font-semibold text-center text-white transition-colors duration-200 hover:bg-orange-dark active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                  className="block w-full rounded-full bg-orange px-6 py-3.5 text-[16px] font-semibold text-center text-white transition-colors duration-200 hover:bg-orange-dark active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
                 >
                   Visit Us
                 </Link>
-                <p className="mt-4 text-center text-xs text-brown-muted tracking-wide">
+                <p className="mt-4 text-center text-xs text-ivory/40 tracking-wide">
                   Maison · Boulangerie · Phuket
                 </p>
               </div>
