@@ -1,97 +1,214 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================================================
+   TERABOULANGER — SEMANTIC DESIGN SYSTEM
+   Official Brand Identity: Cream · Orange · Black
+
+   Light mode:  warm cream canvas (premium bakery paper)
+   Dark mode:   black canvas (luxury editorial / art gallery)
+
+   Usage rules (always prefer these over hardcoded values):
+     bg-bg          — page / section canvas
+     bg-surface     — cards, menus, panels
+     bg-surface-alt — elevated second surface
+     text-text      — primary body / heading
+     text-muted     — secondary copy, metadata
+     text-brand     — orange accent words / highlights
+     bg-brand       — primary buttons
+     text-brand-contrast — text on brand background
+     border-border  — hairline dividers / borders
+     bg-inverse     — opposite canvas (e.g. footer in light)
+     text-inverse   — text on inverse surface
+   ========================================================= */
+
 :root {
-  /* =========================================================
-     TERABOULANGER — UNIFIED DESIGN SYSTEM
-     Contemporary French bakery · Phuket
+  /* Immutable brand palette — do not override per theme */
+  --cream: #fff1cc;
+  --orange: #f77908;
+  --black: #000000;
 
-     Core balance:
-       60-65% warm ivory/cream
-       20-25% burnt orange  #AF572A
-       8-10%  dark brown    #2F241D
-       3-5%  peach accents
-       1-2%  gold / soft blue decorative
-     ========================================================= */
+  /* ——— Light Tera — warm off-white paper with a subtle cream tint ——— */
+  --bg: #fbf4e5;
+  --surface: #f6eddb;
+  --surface-alt: #fffaf0;
 
-  /* Canvas */
-  --background: #fcf7eb;
-  --foreground: #2f241d;
+  --text: #000000;
+  --text-muted: rgba(0, 0, 0, 0.68);
+  --text-subtle: rgba(0, 0, 0, 0.45);
 
-  /* Warm neutrals */
-  --ivory: #fcf7eb;
-  --cream: #ede9e2;
-  --cream-dark: #ded8ce;
-  --paper: #f7f1e5;
+  --brand: #f77908;
+  --brand-hover: #e06a00;
+  --brand-contrast: #000000;
 
-  /* PRIMARY BRAND — burnt orange */
-  --orange: #d75413;
-  --orange-dark: #98481f;
-  --orange-light: #be6a3b;
+  --border: rgba(0, 0, 0, 0.14);
+  --border-strong: rgba(0, 0, 0, 0.28);
 
-  /* Supporting soft peach */
-  --peach: #d9a486;
-  --peach-light: #e7c4ae;
-  --peach-dark: #b97a5b;
+  --inverse: #000000;
+  --inverse-text: #fff1cc;
+  --inverse-muted: rgba(255, 241, 204, 0.7);
+  --inverse-border: rgba(255, 241, 204, 0.16);
 
-  /* Typography — dark chocolate brown */
-  --brown: #2f241d;
-  --brown-light: #5d4637;
-  --brown-muted: #806a5a;
-
-  /* Accent gold / caramel — use sparingly */
-  --gold: #c68a3a;
-  --gold-light: #d9a65d;
-  --gold-dark: #a96e26;
-
-  /* Soft blue — illustration accents only */
-  --blue: #b9cdd5;
-  --blue-light: #dde7ea;
-  --blue-dark: #91aab4;
-
-  /* Pure UI */
-  --white: #ffffff;
-  --black: #171411;
+  --ring: #f77908;
 }
 
+.dark {
+  /* ——— Dark Tera (editorial primary) ——— */
+  --bg: #000000;
+  --surface: #0e0e0e;
+  --surface-alt: #171717;
+
+  --text: #fff1cc;
+  --text-muted: rgba(255, 241, 204, 0.72);
+  --text-subtle: rgba(255, 241, 204, 0.48);
+
+  --brand: #f77908;
+  --brand-hover: #ff8a22;
+  --brand-contrast: #000000;
+
+  --border: rgba(255, 241, 204, 0.16);
+  --border-strong: rgba(255, 241, 204, 0.32);
+
+  --inverse: #fff1cc;
+  --inverse-text: #000000;
+  --inverse-muted: rgba(0, 0, 0, 0.68);
+  --inverse-border: rgba(0, 0, 0, 0.14);
+
+  --ring: #f77908;
+}
+
+/* Tailwind v4 semantic token exports */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
 
-  --color-ivory: var(--ivory);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-contrast: var(--brand-contrast);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-inverse: var(--inverse);
+  --color-inverse-text: var(--inverse-text);
+  --color-inverse-muted: var(--inverse-muted);
+  --color-inverse-border: var(--inverse-border);
+
+  --color-ring: var(--ring);
+
+  /* Immutable brand helpers (use sparingly — only when theme must not change colour) */
   --color-cream: var(--cream);
-  --color-cream-dark: var(--cream-dark);
-  --color-paper: var(--paper);
-
   --color-orange: var(--orange);
-  --color-orange-dark: var(--orange-dark);
-  --color-orange-light: var(--orange-light);
-
-  --color-peach: var(--peach);
-  --color-peach-light: var(--peach-light);
-  --color-peach-dark: var(--peach-dark);
-
-  --color-brown: var(--brown);
-  --color-brown-light: var(--brown-light);
-  --color-brown-muted: var(--brown-muted);
-
-  --color-gold: var(--gold);
-  --color-gold-light: var(--gold-light);
-  --color-gold-dark: var(--gold-dark);
-
-  --color-blue: var(--blue);
-  --color-blue-light: var(--blue-light);
-  --color-blue-dark: var(--blue-dark);
-
-  --color-white: var(--white);
   --color-black: var(--black);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-playfair);
+  --font-serif:
+    var(--font-didot), "Didot", "Bodoni 72", "Playfair Display", Georgia,
+    "Times New Roman", serif;
+  --font-sans:
+    var(--font-adman), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* =========================================================
+   Typography — Official Tera Boulanger direction
+   Headings: Didot (fallback: Playfair Display / Bodoni)
+   Body:     DB AdmanX Light (fallback: Inter / system sans)
+   ========================================================= */
+
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+}
+
+/* Headings default to the serif / editorial face */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================
+   Footer — scoped theme tokens for light & dark editorial look
+
+   LIGHT FOOTER: warm cream paper canvas with black ink
+   DARK FOOTER:  black art-gallery canvas with warm cream ink
+   ========================================================= */
+footer[aria-label="Site footer"] {
+  --bg: #fff1cc;
+  --surface: #f6e8bd;
+  --surface-alt: #fbeac4;
+
+  --text: #000000;
+  --text-muted: rgba(0, 0, 0, 0.64);
+  --text-subtle: rgba(0, 0, 0, 0.42);
+
+  --brand: #f77908;
+  --brand-hover: #e06a00;
+  --brand-contrast: #000000;
+
+  --border: rgba(0, 0, 0, 0.14);
+  --border-strong: rgba(0, 0, 0, 0.26);
+
+  --inverse: #000000;
+  --inverse-text: #fff1cc;
+  --inverse-muted: rgba(255, 241, 204, 0.68);
+  --inverse-border: rgba(255, 241, 204, 0.16);
+}
+
+.dark footer[aria-label="Site footer"] {
+  --bg: #000000;
+  --surface: #111111;
+  --surface-alt: #171717;
+
+  --text: #fff1cc;
+  --text-muted: rgba(255, 241, 204, 0.68);
+  --text-subtle: rgba(255, 241, 204, 0.44);
+
+  --brand: #f77908;
+  --brand-hover: #ff8a22;
+  --brand-contrast: #000000;
+
+  --border: rgba(255, 241, 204, 0.15);
+  --border-strong: rgba(255, 241, 204, 0.3);
+
+  --inverse: #fff1cc;
+  --inverse-text: #000000;
+  --inverse-muted: rgba(0, 0, 0, 0.64);
+  --inverse-border: rgba(0, 0, 0, 0.14);
+}
+
+/* Utility: focus-ring that automatically uses brand ring + semantic offset */
+:where(a, button, [role="button"], [tabindex]:not([tabindex="-1"])) {
+  --tw-ring-color: var(--ring);
+  --tw-ring-offset-color: var(--bg);
+}
+
+/* Respect reduced motion for users who have it enabled */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

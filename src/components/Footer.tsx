@@ -1,4 +1,11 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+
+const MASTER_LOGO_ORANGE = "/Brand_Identity/Logo/master_logo_orange.png";
+
+const KEY_VISUAL_WOMAN_SHELL = "/Brand_Identity/Key_Visual/04_woman_shell.png";
 
 const EXPLORE_LINKS = [
   { href: "/", label: "Home" },
@@ -36,43 +43,11 @@ const PLACEHOLDERS = {
   tiktok: "#",
 };
 
-function BreadIcon() {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M4 18C4 11.37 9.37 6 16 6C22.63 6 28 11.37 28 18C28 21.31 26.65 24.29 24.42 26.23C22.09 25.7 19.15 25.4 16 25.4C12.85 25.4 9.91 25.7 7.58 26.23C5.35 24.29 4 21.31 4 18Z"
-        fill="currentColor"
-      />
-      <path
-        d="M8 16C9 15.2 10.5 14.7 12 14.7C13.5 14.7 14.6 15 16 15.9C17.4 15 18.5 14.7 20 14.7C21.5 14.7 23 15.2 24 16"
-        stroke="#FCF7EB"
-        strokeWidth="1.1"
-        strokeLinecap="round"
-        opacity="0.78"
-      />
-      <path
-        d="M10.5 11L12.5 13M21.5 11L19.5 13"
-        stroke="#FCF7EB"
-        strokeWidth="1.1"
-        strokeLinecap="round"
-        opacity="0.6"
-      />
-    </svg>
-  );
-}
-
 function InstagramIcon() {
   return (
     <svg
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
@@ -84,10 +59,10 @@ function InstagramIcon() {
         height="18"
         rx="5"
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth="1.5"
       />
-      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" />
     </svg>
   );
 }
@@ -95,8 +70,8 @@ function InstagramIcon() {
 function FacebookIcon() {
   return (
     <svg
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
@@ -112,8 +87,8 @@ function FacebookIcon() {
 function TiktokIcon() {
   return (
     <svg
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
@@ -121,11 +96,6 @@ function TiktokIcon() {
       <path
         d="M19.5 7.2C19.5 9.5 17.8 11.4 15.6 11.5V14.9C15.6 18.8 12.4 22 8.6 22C4.8 22 1.6 18.8 1.6 15C1.6 11.2 4.8 8 8.6 8C9 8 9.4 8 9.8 8.1V11C9.5 10.9 9.2 10.9 8.9 10.9C6.7 10.9 4.9 12.7 4.9 14.9C4.9 17.1 6.7 18.9 8.9 18.9C11.1 18.9 12.9 17.1 12.9 14.9V7.5C12.9 7.1 13.2 6.9 13.6 7C14.8 7.3 16.3 6.6 17.1 5.5C17.4 5.9 17.6 6.3 17.6 6.8L17.5 7.2Z"
         fill="currentColor"
-      />
-      <path
-        d="M17.6 2.3C17.6 2.3 17.7 2.3 17.6 2.3V5.5C17.7 5.7 17.8 5.9 17.9 6V2.3H17.6Z"
-        fill="currentColor"
-        opacity="0.5"
       />
     </svg>
   );
@@ -244,62 +214,45 @@ function ArrowRightIcon() {
 export default function Footer() {
   return (
     <footer
-      className="relative w-full bg-brown text-ivory overflow-hidden"
+      className="relative w-full bg-bg text-text overflow-hidden"
       role="contentinfo"
       aria-label="Site footer"
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none opacity-[0.04]"
-      >
-        <svg
-          width="100%"
-          height="100%"
-          preserveAspectRatio="xMidYMid slice"
-          viewBox="0 0 800 600"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 520 Q200 460 400 500 T800 480 L800 600 L0 600 Z"
-            fill="#D9A486"
-          />
-          <path
-            d="M0 560 Q200 510 400 545 T800 530 L800 600 L0 600 Z"
-            fill="#AF572A"
-          />
-        </svg>
-      </div>
-
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-14">
         <section
           aria-labelledby="footer-cta-heading"
-          className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 border-b border-ivory/10"
+          className="pt-20 sm:pt-24 lg:pt-28 pb-14 sm:pb-18 border-b border-border"
         >
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12">
-            <div className="max-w-xl">
-              <span className="inline-flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.22em] text-peach font-semibold mb-4">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-14">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.26em] text-brand font-medium mb-5">
                 <span
                   aria-hidden="true"
-                  className="inline-block w-6 h-px bg-peach/60"
+                  className="inline-block w-8 h-px bg-brand/50"
                 />
                 Teraboulanger Phuket
               </span>
               <h2
                 id="footer-cta-heading"
-                className="font-serif text-3xl sm:text-4xl lg:text-[44px] leading-[1.1] text-ivory font-semibold tracking-tight"
+                className="font-serif text-3xl sm:text-4xl lg:text-[46px] leading-[1.08] font-semibold tracking-tight"
               >
-                Taste You Keep Coming For
-                <span className="block text-peach italic">
+                Come taste the warmth of
+                <span className="block text-brand italic mt-1">
                   French baking in Phuket.
                 </span>
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:shrink-0">
-              <Link
+              <a
                 href={PLACEHOLDERS.mapsUrl}
+                target={PLACEHOLDERS.mapsUrl === "#" ? undefined : "_blank"}
+                rel={
+                  PLACEHOLDERS.mapsUrl === "#"
+                    ? undefined
+                    : "noopener noreferrer"
+                }
                 aria-label="Get directions to Teraboulanger Phuket on Google Maps"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-orange px-7 py-3.5 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-orange-dark active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-[14px] font-semibold text-brand-contrast transition-colors duration-200 hover:bg-brand-hover active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 <MapPinIcon />
                 <span>Get Directions</span>
@@ -309,10 +262,10 @@ export default function Footer() {
                 >
                   <ArrowRightIcon />
                 </span>
-              </Link>
+              </a>
               <Link
                 href="/menu"
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-ivory/25 bg-transparent px-7 py-3.5 text-[14px] font-semibold text-ivory transition-all duration-200 hover:border-peach hover:text-peach active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-7 py-3.5 text-[14px] font-semibold text-text transition-colors duration-200 hover:border-brand hover:text-brand active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 Discover Our Menu
               </Link>
@@ -322,81 +275,86 @@ export default function Footer() {
 
         <nav
           aria-label="Footer navigation"
-          className="py-12 sm:py-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-y-12 border-b border-ivory/10"
+          className="py-14 sm:py-18 lg:py-20 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-y-12 border-b border-border relative"
         >
           <section
             aria-labelledby="footer-brand-heading"
-            className="col-span-2 lg:col-span-4"
+            className="col-span-1 md:col-span-2 lg:col-span-4 relative z-10"
           >
             <h2 id="footer-brand-heading" className="sr-only">
-              Teraboulanger brand information
+              Tera Boulanger brand information
             </h2>
 
             <Link
               href="/"
-              className="inline-flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
+              className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm inline-block"
               aria-label="Teraboulanger Phuket — Back to home"
             >
-              <span
-                aria-hidden="true"
-                className="text-orange transition-transform duration-300 group-hover:-rotate-6"
-              >
-                <BreadIcon />
+              <span className="relative inline-flex h-16 sm:h-18 w-[260px] sm:w-[320px] shrink-0 transition-transform duration-300 origin-left group-hover:scale-[1.01]">
+                <Image
+                  src={MASTER_LOGO_ORANGE}
+                  alt="Teraboulanger"
+                  aria-hidden="true"
+                  fill
+                  sizes="(max-width: 640px) 260px, 320px"
+                  priority={false}
+                  className="object-contain object-left"
+                />
+                <span className="sr-only">
+                  Teraboulanger — Maison Boulangère, Phuket
+                </span>
               </span>
-              <div className="flex flex-col leading-none">
-                <span className="font-serif text-[26px] sm:text-[28px] font-semibold text-ivory tracking-tight">
-                  Teraboulanger
-                </span>
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-peach font-semibold pl-0.5 pt-1.5">
-                  Phuket
-                </span>
-              </div>
             </Link>
 
-            <p className="mt-6 max-w-sm text-[14px] leading-relaxed text-ivory/70">
+            <p className="mt-8 max-w-sm text-[14px] sm:text-[15px] leading-[1.75] text-muted font-light">
               French-inspired artisan baking, crafted with passion in Phuket.
+              <br />
               Handmade pastries, slow-fermented breads, and the unmistakable
               warmth of a true maison boulangère.
             </p>
 
-            <div className="mt-8 flex items-center gap-3">
-              <a
-                href={PLACEHOLDERS.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit Teraboulanger Phuket on Instagram (opens in a new tab)"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ivory/15 text-ivory/70 transition-all duration-200 hover:bg-orange hover:border-orange hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href={PLACEHOLDERS.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit Teraboulanger Phuket on Facebook (opens in a new tab)"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ivory/15 text-ivory/70 transition-all duration-200 hover:bg-orange hover:border-orange hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href={PLACEHOLDERS.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit Teraboulanger Phuket on TikTok (opens in a new tab)"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ivory/15 text-ivory/70 transition-all duration-200 hover:bg-orange hover:border-orange hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
-              >
-                <TiktokIcon />
-              </a>
+            <div className="mt-9 flex items-center gap-3">
+              {[
+                {
+                  href: PLACEHOLDERS.instagram,
+                  label:
+                    "Visit Teraboulanger Phuket on Instagram (opens in a new tab)",
+                  Icon: InstagramIcon,
+                },
+                {
+                  href: PLACEHOLDERS.facebook,
+                  label:
+                    "Visit Teraboulanger Phuket on Facebook (opens in a new tab)",
+                  Icon: FacebookIcon,
+                },
+                {
+                  href: PLACEHOLDERS.tiktok,
+                  label:
+                    "Visit Teraboulanger Phuket on TikTok (opens in a new tab)",
+                  Icon: TiktokIcon,
+                },
+              ].map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-border text-muted transition-colors duration-200 hover:border-brand hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                >
+                  <Icon />
+                </a>
+              ))}
             </div>
           </section>
 
           <section
             aria-labelledby="footer-explore-heading"
-            className="col-span-1 lg:col-span-2"
+            className="col-span-1 md:col-span-1 lg:col-span-2 relative z-10"
           >
             <h3
               id="footer-explore-heading"
-              className="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-peach font-semibold mb-5 sm:mb-6"
+              className="text-[11px] sm:text-xs uppercase tracking-[0.26em] text-brand font-semibold mb-6"
             >
               Explore
             </h3>
@@ -405,15 +363,9 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-[14px] text-ivory/75 transition-colors duration-200 hover:text-peach focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
+                    className="inline-flex text-[14px] text-text/80 transition-colors duration-200 hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="w-0 h-px bg-peach transition-all duration-300 ease-out group-hover:w-5"
-                    />
-                    <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                      {link.label}
-                    </span>
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -422,11 +374,11 @@ export default function Footer() {
 
           <section
             aria-labelledby="footer-menu-heading"
-            className="col-span-1 lg:col-span-3"
+            className="col-span-1 md:col-span-1 lg:col-span-2 relative z-10"
           >
             <h3
               id="footer-menu-heading"
-              className="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-peach font-semibold mb-5 sm:mb-6"
+              className="text-[11px] sm:text-xs uppercase tracking-[0.26em] text-brand font-semibold mb-6"
             >
               Our Bakery
             </h3>
@@ -435,15 +387,9 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-[14px] text-ivory/75 transition-colors duration-200 hover:text-peach focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
+                    className="inline-flex text-[14px] text-text/80 transition-colors duration-200 hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="w-0 h-px bg-peach transition-all duration-300 ease-out group-hover:w-5"
-                    />
-                    <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                      {link.label}
-                    </span>
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -452,11 +398,11 @@ export default function Footer() {
 
           <section
             aria-labelledby="footer-visit-heading"
-            className="col-span-2 md:col-span-4 lg:col-span-3"
+            className="col-span-1 md:col-span-4 lg:col-span-2 relative z-10"
           >
             <h3
               id="footer-visit-heading"
-              className="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-peach font-semibold mb-5 sm:mb-6"
+              className="text-[11px] sm:text-xs uppercase tracking-[0.26em] text-brand font-semibold mb-6"
             >
               Visit Us
             </h3>
@@ -465,14 +411,14 @@ export default function Footer() {
                 <div className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-peach"
+                    className="mt-0.5 shrink-0 text-brand"
                   >
                     <MapPinIcon />
                   </span>
-                  <address className="not-italic text-[14px] leading-relaxed text-ivory/75">
+                  <address className="not-italic text-[14px] leading-relaxed text-text/85">
                     {PLACEHOLDERS.address}
                     <br />
-                    <span className="text-ivory/55 text-[13px]">
+                    <span className="text-muted text-[13px]">
                       Phuket, Thailand
                     </span>
                   </address>
@@ -482,12 +428,14 @@ export default function Footer() {
                 <div className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-peach"
+                    className="mt-0.5 shrink-0 text-brand"
                   >
                     <ClockIcon />
                   </span>
-                  <div className="text-[14px] leading-relaxed text-ivory/75">
-                    <p className="font-medium text-ivory/85 mb-0.5">Hours</p>
+                  <div className="text-[14px] leading-relaxed text-text/85">
+                    <p className="mb-0.5 text-text/60 text-[12.5px] uppercase tracking-wider">
+                      Hours
+                    </p>
                     <p>{PLACEHOLDERS.hours}</p>
                   </div>
                 </div>
@@ -499,7 +447,7 @@ export default function Footer() {
                       ? "#"
                       : `tel:${PLACEHOLDERS.phone}`
                   }
-                  className="group flex items-start gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
+                  className="group flex items-start gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
                   aria-label={
                     PLACEHOLDERS.phone.startsWith("[")
                       ? "Phone number to be added"
@@ -508,11 +456,11 @@ export default function Footer() {
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-peach transition-colors duration-200 group-hover:text-orange"
+                    className="mt-0.5 shrink-0 text-brand transition-colors duration-200 group-hover:text-brand-hover"
                   >
                     <PhoneIcon />
                   </span>
-                  <span className="text-[14px] leading-relaxed text-ivory/75 transition-colors duration-200 group-hover:text-peach">
+                  <span className="text-[14px] leading-relaxed text-text/85 transition-colors duration-200 group-hover:text-brand">
                     {PLACEHOLDERS.phone}
                   </span>
                 </a>
@@ -524,7 +472,7 @@ export default function Footer() {
                       ? "#"
                       : `mailto:${PLACEHOLDERS.email}`
                   }
-                  className="group flex items-start gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
+                  className="group flex items-start gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
                   aria-label={
                     PLACEHOLDERS.email.startsWith("[")
                       ? "Email address to be added"
@@ -533,56 +481,99 @@ export default function Footer() {
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-peach transition-colors duration-200 group-hover:text-orange"
+                    className="mt-0.5 shrink-0 text-brand transition-colors duration-200 group-hover:text-brand-hover"
                   >
                     <MailIcon />
                   </span>
-                  <span className="text-[14px] leading-relaxed text-ivory/75 transition-colors duration-200 group-hover:text-peach break-all">
+                  <span className="text-[14px] leading-relaxed text-text/85 transition-colors duration-200 group-hover:text-brand break-all">
                     {PLACEHOLDERS.email}
                   </span>
                 </a>
               </li>
             </ul>
           </section>
+
+          {/* ——— Official Key Visual: Classical Woman with Shell — editorial artwork ——— */}
+          <div
+            aria-hidden="true"
+            className="col-span-1 md:col-span-4 lg:col-span-2 flex justify-end items-end pt-4 sm:pt-6 lg:pt-0"
+          >
+            <div className="relative w-[220px] sm:w-[260px] md:w-[300px] lg:w-[140%] lg:max-w-none aspect-[3/4] lg:mr-[-28%] xl:mr-[-22%]">
+              <Image
+                src={KEY_VISUAL_WOMAN_SHELL}
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="(max-width: 768px) 260px, (max-width: 1024px) 300px, 360px"
+                priority={false}
+                className="object-contain object-right-bottom select-none"
+                draggable={false}
+              />
+            </div>
+          </div>
         </nav>
 
         <section
           aria-labelledby="footer-newsletter-heading"
-          className="py-10 sm:py-12 border-b border-ivory/10"
+          className="py-14 sm:py-16 border-b border-border relative z-10"
         >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
-            <div className="max-w-lg">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
+            <div className="max-w-lg lg:shrink-0">
+              <span className="block text-[11px] sm:text-xs uppercase tracking-[0.26em] text-brand font-semibold mb-4">
+                Stay in the loop.
+              </span>
               <h3
                 id="footer-newsletter-heading"
-                className="font-serif text-xl sm:text-2xl text-ivory font-semibold tracking-tight"
+                className="sr-only font-serif text-xl sm:text-2xl font-semibold tracking-tight"
               >
                 Stay in the loop.
               </h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-ivory/65">
+              <p className="text-[14px] sm:text-[15px] leading-relaxed text-muted font-light">
                 Discover new bakes, seasonal creations and news from
                 Teraboulanger.
               </p>
             </div>
-            <div className="flex shrink-0">
-              <Link
-                href="/contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-peach/40 bg-transparent px-6 py-3 text-[14px] font-semibold text-peach transition-all duration-200 hover:bg-peach hover:text-brown active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown"
-              >
-                Contact Us
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-200 group-hover:translate-x-0.5"
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="w-full lg:w-auto lg:min-w-[460px] xl:min-w-[520px]"
+              aria-label="Newsletter signup"
+              noValidate
+            >
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
+                <label htmlFor="footer-email" className="sr-only">
+                  Email address
+                </label>
+                <div className="relative flex-1">
+                  <input
+                    id="footer-email"
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    autoComplete="email"
+                    className="w-full h-12 sm:h-[50px] rounded-full bg-transparent border border-border text-text placeholder:text-muted/70 px-5 text-[14px] outline-none transition-colors duration-200 focus:border-brand focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  aria-label="Subscribe to the Teraboulanger newsletter"
+                  className="group inline-flex items-center justify-center gap-2 h-12 sm:h-[50px] px-7 rounded-full bg-brand text-brand-contrast text-[13.5px] font-semibold whitespace-nowrap transition-colors duration-200 hover:bg-brand-hover active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                 >
-                  <ArrowRightIcon />
-                </span>
-              </Link>
-            </div>
+                  Subscribe
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover:translate-x-0.5"
+                  >
+                    <ArrowRightIcon />
+                  </span>
+                </button>
+              </div>
+            </form>
           </div>
         </section>
 
         <section
           aria-labelledby="footer-legal-heading"
-          className="py-6 sm:py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6"
+          className="pt-8 pb-6 sm:pt-10 sm:pb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6 relative z-10"
         >
           <h2 id="footer-legal-heading" className="sr-only">
             Legal navigation and copyright
@@ -593,7 +584,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[12px] sm:text-[13px] text-ivory/45 transition-colors duration-200 hover:text-ivory/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-sm"
+                    className="text-[12.5px] sm:text-[13px] text-muted transition-colors duration-200 hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
                   >
                     {link.label}
                   </Link>
@@ -601,16 +592,19 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
-          <p className="order-1 sm:order-2 text-[12px] sm:text-[13px] text-ivory/45 tracking-wide whitespace-nowrap">
+          <p className="order-1 sm:order-2 text-[12.5px] sm:text-[13px] text-muted tracking-wide whitespace-nowrap">
             &copy; {CURRENT_YEAR} Teraboulanger. All rights reserved.
           </p>
         </section>
 
-        <div aria-hidden="true" className="pb-8 sm:pb-10 flex justify-center">
-          <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-ivory/25 font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange" />
+        <div
+          aria-hidden="true"
+          className="pb-10 sm:pb-12 flex justify-center relative z-10"
+        >
+          <span className="inline-flex items-center gap-2.5 text-[10.5px] sm:text-[11px] uppercase tracking-[0.34em] text-muted font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
             Maison · Boulangerie · Phuket
-            <span className="w-1.5 h-1.5 rounded-full bg-orange" />
+            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
           </span>
         </div>
       </div>
