@@ -230,16 +230,14 @@ export default function Footer() {
                   aria-hidden="true"
                   className="inline-block w-8 h-px bg-brand/50"
                 />
-                Teraboulanger Phuket
+                Tera boulanger Phuket
               </span>
               <h2
                 id="footer-cta-heading"
                 className="font-serif text-3xl sm:text-4xl lg:text-[46px] leading-[1.08] font-semibold tracking-tight"
               >
-                Come taste the warmth of
-                <span className="block text-brand italic mt-1">
-                  French baking in Phuket.
-                </span>
+                Taste you keep coming for.
+                <span className="block text-brand italic mt-1"></span>
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:shrink-0">
@@ -288,12 +286,12 @@ export default function Footer() {
             <Link
               href="/"
               className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm inline-block"
-              aria-label="Teraboulanger Phuket — Back to home"
+              aria-label="Tera Boulanger Phuket — Back to home"
             >
               <span className="relative inline-flex h-16 sm:h-18 w-[260px] sm:w-[320px] shrink-0 transition-transform duration-300 origin-left group-hover:scale-[1.01]">
                 <Image
                   src={MASTER_LOGO_ORANGE}
-                  alt="Teraboulanger"
+                  alt="Tera Boulanger"
                   aria-hidden="true"
                   fill
                   sizes="(max-width: 640px) 260px, 320px"
@@ -301,7 +299,7 @@ export default function Footer() {
                   className="object-contain object-left"
                 />
                 <span className="sr-only">
-                  Teraboulanger — Maison Boulangère, Phuket
+                  Tera Boulanger — Maison Boulangère, Phuket
                 </span>
               </span>
             </Link>
@@ -513,7 +511,8 @@ export default function Footer() {
           </div>
         </nav>
 
-        <section
+        {/* Stay in loop section */}
+        {/* <section
           aria-labelledby="footer-newsletter-heading"
           className="py-14 sm:py-16 border-b border-border relative z-10"
         >
@@ -569,7 +568,7 @@ export default function Footer() {
               </div>
             </form>
           </div>
-        </section>
+        </section> */}
 
         <section
           aria-labelledby="footer-legal-heading"
@@ -603,7 +602,7 @@ export default function Footer() {
         >
           <span className="inline-flex items-center gap-2.5 text-[10.5px] sm:text-[11px] uppercase tracking-[0.34em] text-muted font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-            Maison · Boulangerie · Phuket
+            Tera Boulanger · Phuket
             <span className="w-1.5 h-1.5 rounded-full bg-brand" />
           </span>
         </div>

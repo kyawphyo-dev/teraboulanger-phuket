@@ -192,7 +192,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            <dl
+            {/* <dl
               className="hero-fade-up mt-12 sm:mt-14 grid grid-cols-3 gap-x-6 sm:gap-x-10 gap-y-6 w-full max-w-lg border-t border-border pt-7"
               style={{ animationDelay: "0.72s" }}
             >
@@ -220,7 +220,7 @@ export default function Hero() {
                   T<span className="text-brand">65</span>
                 </dd>
               </div>
-            </dl>
+            </dl> */}
           </div>
 
           <div className="lg:col-span-7 xl:col-span-7 relative">
