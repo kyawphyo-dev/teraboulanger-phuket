@@ -13,6 +13,12 @@ import Link from "next/link";
  * At desktop widths the collage is placed on the LEFT and the text on the
  * RIGHT (the reference's overall sides are reversed). The internal image
  * order and arrangement are NOT reversed or mirrored.
+ *
+ * The phoenix key visual sits above the eyebrow, centred on the text column.
+ * It is a transparent PNG, so it blends directly with the section canvas in
+ * both themes — the file itself is never recoloured or cropped. A small
+ * negative bottom margin lets its transparent lower margin tuck into the
+ * eyebrow's leading space without ever covering the glyphs.
  */
 
 interface CollageSlot {
@@ -117,6 +123,20 @@ export default function BrandIntro() {
 
           {/* ——— RIGHT: text content ——— */}
           <div className="lg:col-span-5">
+            {/* Phoenix key visual — centred above the eyebrow, its transparent
+                lower margin overlapping the eyebrow's leading space only. */}
+            <div className="relative -mb-1 flex justify-center sm:-mb-2">
+              <Image
+                src="/Brand_Identity/Key_Visual/02_phoenix.png"
+                alt=""
+                width={1346}
+                height={1255}
+                sizes="(max-width: 639px) 112px, (max-width: 1023px) 128px, 144px"
+                className="h-auto w-28 select-none sm:w-32 lg:w-36"
+                draggable={false}
+              />
+            </div>
+
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand sm:text-xs">
               The Teraboulanger Philosophy
             </p>
