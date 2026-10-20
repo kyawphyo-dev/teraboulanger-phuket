@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Product {
   id: number;
@@ -61,6 +61,15 @@ const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1464195244916-405fa0a82545?w=800&q=80&auto=format&fit=crop",
     href: "/menu#waffles",
   },
+  {
+    id: 5,
+    category: "Croissant Waffles",
+    name: "Croissant Waffle",
+    description: "A light, soft waffle made with a rich butter flavor.",
+    image:
+      "https://images.unsplash.com/photo-1464195244916-405fa0a82545?w=800&q=80&auto=format&fit=crop",
+    href: "/menu#waffles",
+  },
 ];
 
 function ArrowLeftIcon({ className = "" }: { className?: string }) {
@@ -106,43 +115,78 @@ function ArrowRightIcon({ className = "" }: { className?: string }) {
 }
 
 export default function SignatureProducts() {
-  const [current, setCurrent] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const pitchRef = useRef(0);
+  const [imageBandHeight, setImageBandHeight] = useState(0);
+  const [browse, setBrowse] = useState({ atStart: true, atEnd: true });
 
-  const scrollTo = useCallback((index: number) => {
-    if (scrollRef.current) {
-      const cardWidth =
-        scrollRef.current.offsetWidth /
-        (window.innerWidth >= 1024 ? 4 : window.innerWidth >= 768 ? 2 : 1);
-      scrollRef.current.scrollTo({
-        left: index * cardWidth,
-        behavior: "smooth",
-      });
-      setCurrent(index);
+  /**
+   * Keeps the arrows in step with the strip. `remeasure` re-reads the card
+   * pitch and image-band height (mount + resize); plain scroll syncing reuses
+   * the cached geometry so scrolling stays cheap.
+   */
+  const syncLayout = useCallback((remeasure: boolean) => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    if (remeasure || pitchRef.current === 0) {
+      const first = el.children[0] as HTMLElement | undefined;
+      const second = el.children[1] as HTMLElement | undefined;
+      pitchRef.current =
+        first && second
+          ? Math.abs(
+              second.getBoundingClientRect().left -
+                first.getBoundingClientRect().left,
+            )
+          : el.clientWidth;
+
+      const imageBand = first?.firstElementChild as HTMLElement | undefined;
+      setImageBandHeight(imageBand?.offsetHeight ?? 0);
     }
+
+    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    const pitch = pitchRef.current || el.clientWidth;
+    /* Steps available in each direction, derived from the real scroll range so
+       the arrows disappear exactly where nothing further can be reached. */
+    const maxIndex = pitch > 0 ? Math.round(maxScroll / pitch) : 0;
+    const index = Math.min(
+      maxIndex,
+      Math.max(0, Math.round(el.scrollLeft / pitch)),
+    );
+
+    const atStart = maxScroll <= 1 || index <= 0;
+    const atEnd = maxScroll <= 1 || index >= maxIndex;
+    setBrowse((prev) =>
+      prev.atStart === atStart && prev.atEnd === atEnd
+        ? prev
+        : { atStart, atEnd },
+    );
   }, []);
 
-  const goNext = useCallback(() => {
-    const max =
-      PRODUCTS.length -
-      (window.innerWidth >= 1024 ? 4 : window.innerWidth >= 768 ? 2 : 1);
-    setCurrent((prev) => {
-      const next = prev + 1 > max ? 0 : prev + 1;
-      scrollTo(next);
-      return next;
-    });
-  }, [scrollTo]);
+  useEffect(() => {
+    syncLayout(true);
+    const handleResize = () => syncLayout(true);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [syncLayout]);
 
-  const goPrev = useCallback(() => {
-    const max =
-      PRODUCTS.length -
-      (window.innerWidth >= 1024 ? 4 : window.innerWidth >= 768 ? 2 : 1);
-    setCurrent((prev) => {
-      const next = prev - 1 < 0 ? max : prev - 1;
-      scrollTo(next);
-      return next;
-    });
-  }, [scrollTo]);
+  const handleScroll = useCallback(() => syncLayout(false), [syncLayout]);
+
+  /** Advance by exactly one card, clamped to the scrollable range. */
+  const scrollTo = useCallback((direction: 1 | -1) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const pitch = pitchRef.current || el.clientWidth;
+    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    const target = Math.min(
+      Math.max(el.scrollLeft + direction * pitch, 0),
+      maxScroll,
+    );
+    el.scrollTo({ left: target, behavior: "smooth" });
+  }, []);
+
+  const goPrev = useCallback(() => scrollTo(-1), [scrollTo]);
+  const goNext = useCallback(() => scrollTo(1), [scrollTo]);
 
   return (
     <section
@@ -196,37 +240,41 @@ export default function SignatureProducts() {
           </div>
 
           {/* ——— RIGHT: Product Gallery ——— */}
-          <div className="lg:col-span-8 flex flex-col">
-            {/* Gallery Controls */}
-            <div className="flex items-center justify-between lg:justify-end gap-6 mb-8 lg:mb-10">
-              <div className="flex items-center gap-4">
-                <span className="text-[13px] tracking-[0.1em] text-muted font-medium min-w-[3rem] text-right">
-                  {current + 1} / {PRODUCTS.length}
-                </span>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={goPrev}
-                    aria-label="Previous signature products"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-transparent text-text transition-all duration-200 hover:border-brand hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg active:scale-95"
-                  >
-                    <ArrowLeftIcon />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goNext}
-                    aria-label="Next signature products"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-transparent text-text transition-all duration-200 hover:border-brand hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg active:scale-95"
-                  >
-                    <ArrowRightIcon />
-                  </button>
-                </div>
-              </div>
+          <div className="relative lg:col-span-8 flex flex-col">
+            {/* Edge arrows — centred on the product images, and rendered only
+                while there is still somewhere further to scroll. */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 z-10"
+              style={
+                imageBandHeight > 0 ? { height: imageBandHeight } : undefined
+              }
+            >
+              {!browse.atStart && (
+                <button
+                  type="button"
+                  onClick={goPrev}
+                  aria-label="Show previous signature products"
+                  className="pointer-events-auto absolute left-0 top-1/2 -ml-5 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-text shadow-sm transition-all duration-200 hover:border-brand hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg active:scale-95 sm:-ml-6 lg:-ml-5"
+                >
+                  <ArrowLeftIcon className="h-5 w-5" />
+                </button>
+              )}
+              {!browse.atEnd && (
+                <button
+                  type="button"
+                  onClick={goNext}
+                  aria-label="Show next signature products"
+                  className="pointer-events-auto absolute right-0 top-1/2 -mr-5 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface text-text shadow-sm transition-all duration-200 hover:border-brand hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg active:scale-95 sm:-mr-6 lg:-mr-5"
+                >
+                  <ArrowRightIcon className="h-5 w-5" />
+                </button>
+              )}
             </div>
 
             {/* Cards Scroll Container */}
             <div
               ref={scrollRef}
+              onScroll={handleScroll}
               className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-5 px-5 sm:-mx-8 sm:px-8 lg:-mx-0 lg:px-0 gap-6 sm:gap-8"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
