@@ -275,15 +275,15 @@ export default function SignatureProducts() {
             <div
               ref={scrollRef}
               onScroll={handleScroll}
-              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-5 px-5 sm:-mx-8 sm:px-8 lg:-mx-0 lg:px-0 gap-6 sm:gap-8"
+              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-5 px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 gap-6 sm:gap-8"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {PRODUCTS.map((product) => (
                 <div
                   key={product.id}
-                  className="flex-none w-[280px] sm:w-[calc(50%-16px)] lg:w-[calc(25%-18px)] snap-start group"
+                  className="flex-none w-70 sm:w-[calc(50%-16px)] lg:w-[calc(25%-18px)] snap-start group"
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-[4px] bg-surface mb-6">
+                  <div className="relative aspect-3/4 overflow-hidden rounded-sm bg-surface mb-6">
                     <Image
                       src={product.image}
                       alt={product.name}

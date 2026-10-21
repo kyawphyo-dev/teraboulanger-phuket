@@ -154,7 +154,7 @@ export default function Hero() {
 
             <h1
               id="hero-heading"
-              className="hero-reveal font-serif font-medium text-text tracking-tight text-[40px] leading-[1.04] sm:text-[56px] sm:leading-[1.0] lg:text-[68px] lg:leading-[0.98]"
+              className="hero-reveal font-serif font-medium text-text tracking-tight text-[40px] leading-[1.04] sm:text-[56px] sm:leading-1.0 lg:text-[68px] lg:leading-[0.98]"
               style={{ animationDelay: "0.22s" }}
             >
               A Taste of France,
@@ -178,14 +178,14 @@ export default function Hero() {
             >
               <Link
                 href="/menu"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] sm:text-[15px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] sm:text-[15px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 Explore Our Menu
                 <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-8 py-4 text-[14px] sm:text-[15px] font-semibold text-text transition-all duration-200 hover:border-border-strong hover:bg-surface-alt active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-8 py-4 text-[14px] sm:text-[15px] font-semibold text-text transition-all duration-200 hover:border-border-strong hover:bg-surface-alt active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 <MapPinIcon className="text-brand" />
                 Find Our Bakery
@@ -235,7 +235,7 @@ export default function Hero() {
               style={{ animationDelay: "0.3s" }}
             >
               <figure className="relative w-full">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] border border-border bg-surface">
+                <div className="relative aspect-4/3 w-full overflow-hidden rounded-[20px] border border-border bg-surface">
                   {SLIDES.map((slide, index) => {
                     const isActive = index === current;
                     return (
