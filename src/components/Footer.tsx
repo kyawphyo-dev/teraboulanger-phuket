@@ -288,7 +288,7 @@ export default function Footer() {
               className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm inline-block"
               aria-label="Tera Boulanger Phuket — Back to home"
             >
-              <span className="relative inline-flex h-16 sm:h-18 w-[260px] sm:w-[320px] shrink-0 transition-transform duration-300 origin-left group-hover:scale-[1.01]">
+              <span className="relative inline-flex h-16 sm:h-18 w-65 sm:w-[320px] shrink-0 transition-transform duration-300 origin-left group-hover:scale-[1.01]">
                 <Image
                   src={MASTER_LOGO_ORANGE}
                   alt="Tera Boulanger"
@@ -496,7 +496,7 @@ export default function Footer() {
             aria-hidden="true"
             className="col-span-1 md:col-span-4 lg:col-span-2 flex justify-end items-end pt-4 sm:pt-6 lg:pt-0"
           >
-            <div className="relative w-[220px] sm:w-[260px] md:w-[300px] lg:w-[140%] lg:max-w-none aspect-[3/4] lg:mr-[-28%] xl:mr-[-22%]">
+            <div className="relative w-55 sm:w-65 md:w-75 lg:w-[140%] lg:max-w-none aspect-3/4 lg:mr-[-28%] xl:mr-[-22%]">
               <Image
                 src={KEY_VISUAL_WOMAN_SHELL}
                 alt=""
@@ -504,7 +504,7 @@ export default function Footer() {
                 fill
                 sizes="(max-width: 768px) 260px, (max-width: 1024px) 300px, 360px"
                 priority={false}
-                className="object-contain object-right-bottom select-none"
+                className="object-contain object-bottom-right select-none"
                 draggable={false}
               />
             </div>

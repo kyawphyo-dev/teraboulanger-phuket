@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import BrandIntro from "../components/BrandIntro";
 import SignatureProducts from "../components/SignatureProducts";
+import CraftIngredients from "../components/CraftIngredients";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <BrandIntro />
       <SignatureProducts />
+      <CraftIngredients />
     </div>
   );
 }

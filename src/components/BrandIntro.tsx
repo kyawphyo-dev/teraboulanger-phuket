@@ -95,7 +95,7 @@ export default function BrandIntro() {
           {/* ——— LEFT: photographic collage (faithful to reference) ——— */}
           <div className="lg:col-span-7">
             <div
-              className="grid grid-cols-3 grid-rows-10 gap-1.5 bg-bg sm:gap-2 aspect-[4/5] sm:aspect-[5/6]"
+              className="grid grid-cols-3 grid-rows-10 gap-1.5 bg-bg sm:gap-2 aspect-4/5 sm:aspect-5/6"
               role="img"
               aria-label="Teraboulanger brand collage"
             >
@@ -156,7 +156,7 @@ export default function BrandIntro() {
             <div className="mt-8">
               <Link
                 href="/our-story"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
               >
                 Discover Our Story
                 <svg
