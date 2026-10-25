@@ -26,13 +26,13 @@ const SITE_URL = "https://teraboulanger.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Teraboulanger Phuket — Artisan French Bakery",
-    template: "%s | Teraboulanger Phuket",
+    default: "Tera Boulanger Phuket — Artisan French Bakery",
+    template: "%s | Tera Boulanger Phuket",
   },
   description:
-    "Teraboulanger brings authentic French bakery craftsmanship to Phuket. Handmade pastries, artisan breads, and premium café experience.",
+    "Tera Boulanger brings authentic French bakery craftsmanship to Phuket. Handmade pastries, artisan breads, and premium café experience.",
   keywords: [
-    "Teraboulanger",
+    "Tera Boulanger",
     "French bakery Phuket",
     "artisan bread Phuket",
     "croissant Phuket",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     "bakery Phuket",
     "viennoiserie Phuket",
   ],
-  authors: [{ name: "Teraboulanger" }],
-  creator: "Teraboulanger",
-  publisher: "Teraboulanger",
+  authors: [{ name: "Tera Boulanger" }],
+  creator: "Tera Boulanger",
+  publisher: "Tera Boulanger",
   alternates: {
     canonical: "/",
   },
@@ -50,16 +50,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "Teraboulanger Phuket",
-    title: "Teraboulanger Phuket — Artisan French Bakery",
+    siteName: "Tera Boulanger Phuket",
+    title: "Tera Boulanger Phuket — Artisan French Bakery",
     description:
-      "Teraboulanger brings authentic French bakery craftsmanship to Phuket. Handmade pastries, artisan breads, and premium café experience.",
+      "Tera Boulanger brings authentic French bakery craftsmanship to Phuket. Handmade pastries, artisan breads, and premium café experience.",
     images: [
       {
         url: "/Brand_Identity/Logo/master_logo_orange.png",
         width: 968,
         height: 563,
-        alt: "Teraboulanger Phuket logo",
+        alt: "Tera Boulanger Phuket logo",
       },
     ],
   },
