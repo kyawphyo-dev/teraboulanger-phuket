@@ -13,8 +13,6 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-const MASTER_LOGO_BLACK = "/Brand_Identity/Logo/master_logo_black.png";
-const MASTER_LOGO_CREAM = "/Brand_Identity/Logo/master_logo_cream.png";
 const MASTER_LOGO_ORANGE = "/Brand_Identity/Logo/master_logo_orange.png";
 
 function ChevronRight({ className = "" }: { className?: string }) {
