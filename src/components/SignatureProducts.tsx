@@ -62,7 +62,7 @@ const PRODUCTS: Product[] = [
     href: "/menu#waffles",
   },
   {
-    id: 5,
+    id: 6,
     category: "Croissant Waffles",
     name: "Croissant Waffle",
     description: "A light, soft waffle made with a rich butter flavor.",
