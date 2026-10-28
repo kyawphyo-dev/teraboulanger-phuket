@@ -30,6 +30,45 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const MODE_CYCLE: ThemeMode[] = ["dark", "light", "system"];
 
+// Runs before hydration and before first paint to apply the persisted theme and
+// avoid a flash of the wrong theme.
+//
+// Rendered from a Client Component inside the root layout's <head>: on the
+// server the `type` is a classic JS MIME type, so the browser executes it
+// synchronously while parsing the HTML (before anything is painted). On the
+// client React renders it as an inert `text/plain` data block instead, which is
+// what keeps React from logging "Encountered a script tag while rendering React
+// component" — React never executes scripts it creates on the client anyway.
+// `suppressHydrationWarning` covers the resulting `type` attribute mismatch.
+const THEME_INIT_SCRIPT = `(function(){
+  try {
+    var KEY = 'teraboulanger.theme';
+    var DEFAULT = 'dark';
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    var mode = stored && (stored === 'light' || stored === 'dark' || stored === 'system') ? stored : DEFAULT;
+    var resolved = mode;
+    if (mode === 'system') {
+      resolved = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    var root = document.documentElement;
+    if (resolved === 'dark') root.classList.add('dark');
+    else root.classList.remove('dark');
+    root.style.colorScheme = resolved;
+  } catch (e) {}
+})();`;
+
+export function ThemeInitScript() {
+  return (
+    <script
+      id="teraboulanger-theme-init"
+      type={typeof window === "undefined" ? "text/javascript" : "text/plain"}
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+    />
+  );
+}
+
 function readStoredMode(fallback: ThemeMode): ThemeMode {
   if (typeof window === "undefined") return fallback;
   try {

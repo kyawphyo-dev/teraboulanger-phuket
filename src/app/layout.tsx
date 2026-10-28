@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "../components/ThemeProvider";
+import { ThemeProvider, ThemeInitScript } from "../components/ThemeProvider";
 import AnnouncementBar from "../components/AnnouncementBar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -99,28 +99,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable}`}
     >
       <head>
-        <script
-          id="teraboulanger-theme-init"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){
-  try {
-    var KEY = 'teraboulanger.theme';
-    var DEFAULT = 'dark';
-    var stored = null;
-    try { stored = localStorage.getItem(KEY); } catch (e) {}
-    var mode = stored && (stored === 'light' || stored === 'dark' || stored === 'system') ? stored : DEFAULT;
-    var resolved = mode;
-    if (mode === 'system') {
-      resolved = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    var root = document.documentElement;
-    if (resolved === 'dark') root.classList.add('dark');
-    else root.classList.remove('dark');
-    root.style.colorScheme = resolved;
-  } catch (e) {}
-})();`,
-          }}
-        />
+        <ThemeInitScript />
       </head>
       <body className="min-h-full flex flex-col bg-bg text-text font-sans antialiased">
         <ThemeProvider defaultMode="dark">
