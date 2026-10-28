@@ -40,11 +40,15 @@ export default function PartnersSection() {
             </p>
           </div>
           <div className="lg:col-span-5 flex flex-col justify-between items-end text-right">
-            <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden mb-8 hidden lg:block">
+            <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden mb-8 hidden lg:block bg-surface">
               <Image
-                src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Editorial+photography+of+a+professional+chef+hands+holding+a+tray+of+golden+brown+croissants+in+a+warm+bakery+lighting&image_size=landscape_4_3"
-                alt="Craftsmanship"
+                src={PARTNERS_CONFIG.section.heroImage.src}
+                alt={PARTNERS_CONFIG.section.heroImage.alt}
                 fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                onError={(event) => {
+                  event.currentTarget.style.visibility = "hidden";
+                }}
                 className="object-cover"
               />
               <div className="absolute top-6 right-6 text-cream text-right">
@@ -110,8 +114,12 @@ export default function PartnersSection() {
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface mb-8 rounded-sm">
                 <Image
                   src={partner.image}
-                  alt={partner.name}
+                  alt={partner.imageAlt}
                   fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  onError={(event) => {
+                    event.currentTarget.style.visibility = "hidden";
+                  }}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -196,11 +204,15 @@ export default function PartnersSection() {
             </div>
 
             {/* Right Image */}
-            <div className="relative min-h-[300px] lg:min-h-0 order-1 lg:order-2">
+            <div className="relative min-h-[300px] lg:min-h-0 order-1 lg:order-2 bg-surface">
               <Image
                 src={PARTNERS_CONFIG.cta.sideImage.src}
                 alt={PARTNERS_CONFIG.cta.sideImage.alt}
                 fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                onError={(event) => {
+                  event.currentTarget.style.visibility = "hidden";
+                }}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/20" />
