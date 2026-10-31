@@ -31,7 +31,7 @@ export default function PartnersSection() {
             </span>
             <h2
               id="partners-heading"
-              className="font-serif text-[40px] sm:text-[56px] lg:text-[72px] leading-[1.1] tracking-tight mb-8 whitespace-pre-line"
+              className="font-serif text-[42px] sm:text-[32px] lg:text-[48px] leading-[1.1] tracking-tight mb-8 whitespace-pre-line"
             >
               {PARTNERS_CONFIG.section.heading}
             </h2>
