@@ -12,7 +12,7 @@ export interface TestimonialSlide {
 export const TESTIMONIALS_CONFIG = {
   section: {
     tagline: "Testimonials",
-    heading: "What Our\nPartners Say",
+    heading: "What Our Partners Say",
     description:
       "We’re grateful for the trust and support from our partners. Their words inspire us to keep delivering the best, every day.",
   },

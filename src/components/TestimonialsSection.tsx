@@ -45,30 +45,31 @@ export default function TestimonialsSection() {
       className="w-full bg-bg text-text py-20 lg:py-32 overflow-hidden transition-colors duration-500"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* ——— Left: Section Introduction ——— */}
-          <div className="lg:col-span-3 flex flex-col h-full">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-[10px] sm:text-xs tracking-[0.3em] font-bold text-brand uppercase">
-                {TESTIMONIALS_CONFIG.section.tagline}
-              </span>
-              <div className="h-px w-8 bg-brand/40" />
-            </div>
-
-            <h2
-              id="testimonials-heading"
-              className="font-serif text-[32px] sm:text-[42px] lg:text-[48px] leading-[1.15] tracking-tight mb-6 whitespace-pre-line"
-            >
-              {TESTIMONIALS_CONFIG.section.heading}
-            </h2>
-
-            <p className="font-sans text-sm sm:text-base text-muted max-w-xs leading-relaxed mb-8">
-              {TESTIMONIALS_CONFIG.section.description}
-            </p>
+        {/* ——— Level 1: Introduction ——— */}
+        <div className="w-full pb-10 lg:pb-14 mb-8 lg:mb-10 border-b border-border/10">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="text-[10px] sm:text-xs tracking-[0.3em] font-bold text-brand uppercase">
+              {TESTIMONIALS_CONFIG.section.tagline}
+            </span>
+            <div className="h-px w-8 bg-brand/40" />
           </div>
 
-          {/* ——— Center: Featured Testimonial ——— */}
-          <div className="lg:col-span-5 relative">
+          <h2
+            id="testimonials-heading"
+            className="w-full font-serif text-[30px] sm:text-[38px] lg:text-[44px] leading-[1.15] tracking-tight"
+          >
+            {TESTIMONIALS_CONFIG.section.heading}
+          </h2>
+
+          <p className="w-full font-sans text-sm sm:text-base text-muted leading-relaxed mt-6">
+            {TESTIMONIALS_CONFIG.section.description}
+          </p>
+        </div>
+
+        {/* ——— Level 2: Testimonial content ——— */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left: Quote, attribution & controls */}
+          <div className="lg:col-span-7">
             <div
               className={`transition-all duration-500 ease-in-out ${
                 isAnimating
@@ -82,8 +83,8 @@ export default function TestimonialsSection() {
               </span>
 
               {/* Testimonial Quote */}
-              <blockquote className="mb-8">
-                <p className="font-serif text-xl sm:text-lg lg:text-2xl lg:leading-[1.35] text-text italic">
+              <blockquote className="mb-8 max-w-2xl">
+                <p className="font-serif text-lg sm:text-xl lg:text-[28px] lg:leading-[1.4] text-text italic">
                   {currentSlide.quote}
                 </p>
               </blockquote>
@@ -151,8 +152,8 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          {/* ——— Right: Featured Photograph ——— */}
-          <div className="lg:col-span-4">
+          {/* Right: Featured Photograph */}
+          <div className="lg:col-span-5">
             <div className="relative aspect-[4/3] w-full rounded-sm overflow-hidden bg-surface group">
               <div
                 className={`w-full h-full transition-all duration-700 ease-in-out ${
@@ -165,7 +166,7 @@ export default function TestimonialsSection() {
                   src={currentSlide.image}
                   alt={currentSlide.imageAlt}
                   fill
-                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  sizes="(min-width: 1024px) 42vw, 100vw"
                   priority
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
