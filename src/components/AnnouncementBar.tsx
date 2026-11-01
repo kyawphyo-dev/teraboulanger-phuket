@@ -249,20 +249,6 @@ export default function AnnouncementBar() {
           </button>
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes twinkle {
-          0%,
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.55;
-            transform: scale(0.92);
-          }
-        }
-      `}</style>
     </div>
   );
 }

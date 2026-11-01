@@ -241,7 +241,7 @@ export default function Footer() {
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:shrink-0">
-              <a
+              {/* <a
                 href={PLACEHOLDERS.mapsUrl}
                 target={PLACEHOLDERS.mapsUrl === "#" ? undefined : "_blank"}
                 rel={
@@ -260,7 +260,7 @@ export default function Footer() {
                 >
                   <ArrowRightIcon />
                 </span>
-              </a>
+              </a> */}
               <Link
                 href="/menu"
                 className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-7 py-3.5 text-[14px] font-semibold text-text transition-colors duration-200 hover:border-brand hover:text-brand active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg"

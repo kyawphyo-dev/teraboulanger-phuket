@@ -276,3 +276,27 @@ footer[aria-label="Site footer"] {
     filter: none;
   }
 }
+
+/* =========================================================
+   Announcement bar — twinkling icon
+   (declared globally so the utility can reference it
+   without a runtime-injected <style> block)
+   ========================================================= */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+}
+
+/* =========================================================
+   Horizontal scroll rails — hide the native scrollbar
+   ========================================================= */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

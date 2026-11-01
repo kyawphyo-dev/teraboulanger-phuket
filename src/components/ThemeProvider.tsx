@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   useCallback,
@@ -42,8 +43,8 @@ const MODE_CYCLE: ThemeMode[] = ["dark", "light", "system"];
 // `suppressHydrationWarning` covers the resulting `type` attribute mismatch.
 const THEME_INIT_SCRIPT = `(function(){
   try {
-    var KEY = 'teraboulanger.theme';
-    var DEFAULT = 'dark';
+    var KEY = '${THEME_STORAGE_KEY}';
+    var DEFAULT = '${DEFAULT_MODE}';
     var stored = null;
     try { stored = localStorage.getItem(KEY); } catch (e) {}
     var mode = stored && (stored === 'light' || stored === 'dark' || stored === 'system') ? stored : DEFAULT;
@@ -87,20 +88,34 @@ interface ThemeProviderProps {
   defaultMode?: ThemeMode;
 }
 
+// Applied before the browser paints so the persisted preference is adopted
+// without a visible flash; falls back to useEffect on the server where layout
+// effects do not run.
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 export function ThemeProvider({
   children,
   defaultMode = DEFAULT_MODE,
 }: ThemeProviderProps) {
-  const [mode, setModeState] = useState<ThemeMode>(() =>
-    readStoredMode(defaultMode),
-  );
+  // Deterministic initial state so the server output and the client's first
+  // render always agree. Reading localStorage / matchMedia here would make the
+  // server and client diverge and trigger a hydration mismatch.
+  const [mode, setModeState] = useState<ThemeMode>(defaultMode);
   const [resolved, setResolved] = useState<ResolvedTheme>(() =>
-    resolve(readStoredMode(defaultMode)),
+    defaultMode === "system" ? "dark" : defaultMode,
   );
 
-  useEffect(() => {
-    applyTheme(resolve(mode));
-  }, [mode]);
+  // Adopt the persisted preference after hydration. ThemeInitScript has already
+  // applied the matching class to <html> before the first paint, so this only
+  // syncs React state to the DOM rather than flashing the wrong theme.
+  useIsomorphicLayoutEffect(() => {
+    const stored = readStoredMode(defaultMode);
+    const nextResolved = resolve(stored);
+    setModeState(stored);
+    setResolved(nextResolved);
+    applyTheme(nextResolved);
+  }, [defaultMode]);
 
   useEffect(() => {
     if (mode !== "system") return;

@@ -319,12 +319,6 @@ export default function SignatureProducts() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 }
