@@ -138,7 +138,7 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative w-full bg-bg text-text overflow-hidden"
     >
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16 lg:pt-20 pb-14 sm:pb-20 lg:pb-28">
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16 lg:pt-20 pb-14 sm:pb-12 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-5 xl:col-span-5 flex flex-col items-start">
             <span

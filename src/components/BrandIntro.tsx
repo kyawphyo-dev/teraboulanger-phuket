@@ -88,7 +88,7 @@ export default function BrandIntro() {
   return (
     <section
       aria-labelledby="brand-intro-heading"
-      className="bg-bg py-16 sm:py-20 lg:py-28"
+      className="bg-bg py-16 sm:py-12 lg:py-20"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">

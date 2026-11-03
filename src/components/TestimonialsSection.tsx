@@ -42,7 +42,7 @@ export default function TestimonialsSection() {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="w-full bg-bg text-text py-20 lg:py-32 overflow-hidden transition-colors duration-500"
+      className="w-full bg-bg text-text py-16 sm:py-12 lg:py-20 overflow-hidden transition-colors duration-500"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* ——— Level 1: Introduction ——— */}

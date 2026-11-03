@@ -71,7 +71,7 @@ export default function CraftIngredients() {
   return (
     <section
       aria-labelledby="craft-heading"
-      className="bg-bg py-16 sm:py-20 lg:py-28"
+      className="bg-bg py-16 sm:py-12 lg:py-20"
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">

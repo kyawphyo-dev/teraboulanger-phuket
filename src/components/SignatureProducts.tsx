@@ -191,7 +191,7 @@ export default function SignatureProducts() {
   return (
     <section
       aria-labelledby="signature-heading"
-      className="bg-bg py-20 sm:py-24 lg:py-32 overflow-hidden"
+      className="bg-bg py-16 sm:py-12 lg:py-20 overflow-hidden"
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">

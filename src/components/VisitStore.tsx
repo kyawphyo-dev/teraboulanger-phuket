@@ -1,124 +1,230 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { STORE_CONFIG } from "@/lib/store-config";
+import { STORE_CONFIG, type StoreBranch } from "@/lib/store-config";
+
+const BRAND_SYMBOL = "/Brand_Identity/Logo/logo_symbol_orange.png";
 
 /**
- * VisitStore Component - Concept 02: Image + Overlay Info
- * Implements a full-width bakery storefront photograph with an elegant
- * information overlay on the right side.
+ * VisitStore — "Visit Our Stores" section.
+ *
+ * Fully data-driven: the branch collection lives in `STORE_CONFIG.branches`
+ * and this component only handles presentation. Grid behaviour scales with the
+ * number of branches — one centred featured card, two columns, or a 3-column
+ * grid — while every card keeps identical photo proportions.
  */
 export default function VisitStore() {
+  const { label, heading, description, social, branches } = STORE_CONFIG;
+
+  const branchCount = branches.length;
+  const isSingleBranch = branchCount === 1;
+  const isBranchPair = branchCount === 2;
+
+  // One branch: a centred featured card so it never stretches awkwardly.
+  // Two: side by side. Three or more: a responsive grid.
+  const gridClassName = [
+    "grid grid-cols-1 gap-8 sm:gap-10",
+    isSingleBranch
+      ? "mx-auto max-w-xl"
+      : isBranchPair
+        ? "sm:grid-cols-2"
+        : "sm:grid-cols-2 lg:grid-cols-3",
+  ].join(" ");
+
+  const imageSizes = isSingleBranch
+    ? "(min-width: 640px) 576px, 100vw"
+    : isBranchPair
+      ? "(min-width: 640px) 50vw, 100vw"
+      : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
+
   return (
     <section
-      aria-labelledby="visit-store-heading"
-      className="relative w-full overflow-hidden bg-bg py-12 sm:py-16 lg:py-20"
+      aria-labelledby="visit-stores-heading"
+      className="w-full bg-bg py-16 text-text transition-colors duration-500 sm:py-12 lg:py-20"
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
-        {/* ——— Brand Frame ——— */}
-        <div className="relative w-full overflow-hidden rounded-sm bg-black shadow-2xl lg:rounded-md">
-          {/* Media frame — height is content-driven on mobile so nothing can
-              be clipped; from sm up it becomes the original fixed-ratio
-              cinematic frame. */}
-          <div className="relative w-full sm:aspect-[16/9] sm:min-h-[600px] lg:min-h-[700px]">
-            {/* ——— Background Image ——— */}
-            {/* The original bakery storefront photograph is preserved */}
-            <div className="absolute inset-0 z-0">
-              <Image
-                src={STORE_CONFIG.storefrontImage.src}
-                alt={STORE_CONFIG.storefrontImage.alt}
-                fill
-                priority
-                sizes="(max-width: 1280px) 100vw, 1280px"
-                className="object-cover object-center"
-              />
-            </div>
-
-            {/* ——— Gradient Overlay ——— */}
-            {/* The original cinematic dark overlay is preserved */}
-            <div
-              className="absolute inset-0 z-10 bg-black/50 sm:bg-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-black/40 sm:to-black/80"
-              aria-hidden="true"
-            />
-
-            {/* ——— Information Block ——— */}
-            {/* In normal flow on mobile (the section grows to fit); becomes the
-                full-height overlay from the sm breakpoint up. */}
-            <div className="relative z-20 flex min-h-[520px] flex-col justify-center px-6 py-12 text-center sm:absolute sm:inset-0 sm:min-h-0 sm:items-end sm:px-12 sm:py-12 sm:text-right lg:px-20">
-              <div className="mx-auto flex w-full max-w-md flex-col items-center sm:mx-0 sm:items-end">
-                <h2
-                  id="visit-store-heading"
-                  className="font-serif text-[26px] leading-[1.15] tracking-[0.03em] sm:text-[42px] sm:leading-[1.05] sm:tracking-[0.05em] lg:text-[56px] uppercase text-cream mb-5 sm:mb-6"
-                >
-                  {STORE_CONFIG.heading}
-                </h2>
-
-                <p className="font-serif italic text-[15px] leading-relaxed sm:text-[21px] lg:text-[24px] text-cream/90 mb-8 sm:mb-10 max-w-sm">
-                  {STORE_CONFIG.description}
-                </p>
-
-                {/* Store Details */}
-                <div className="flex flex-col gap-6 mb-8 text-cream/80 w-full items-center sm:gap-10 sm:mb-12 sm:items-end">
-                  {/* Address */}
-                  <div className="flex flex-col items-center sm:items-end group">
-                    <div className="flex items-center gap-3 mb-2 sm:mb-3 text-brand">
-                      <span className="text-[10px] tracking-[0.3em] sm:text-xs sm:tracking-[0.35em] uppercase font-bold">
-                        Location
-                      </span>
-                      <MapPinIcon className="w-4 h-4 shrink-0" />
-                    </div>
-                    <address className="not-italic text-[14px] leading-relaxed sm:text-[17px] text-cream/70 font-sans">
-                      {STORE_CONFIG.address.line1}
-                      <br />
-                      {STORE_CONFIG.address.line2}
-                    </address>
-                  </div>
-
-                  {/* Opening Hours */}
-                  <div className="flex flex-col items-center sm:items-end group">
-                    <div className="flex items-center gap-3 mb-2 sm:mb-3 text-brand">
-                      <span className="text-[10px] tracking-[0.3em] sm:text-xs sm:tracking-[0.35em] uppercase font-bold">
-                        Hours
-                      </span>
-                      <ClockIcon className="w-4 h-4 shrink-0" />
-                    </div>
-                    <div className="text-[14px] leading-relaxed sm:text-[17px] text-cream/70 font-sans">
-                      <p>{STORE_CONFIG.openingHours.schedule}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col items-center gap-5 sm:gap-8 sm:items-end w-full">
-                  <Link
-                    href={STORE_CONFIG.cta.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 sm:gap-3 h-12 sm:h-14 w-full px-8 sm:px-12 sm:w-auto bg-brand text-black font-bold text-[13px] tracking-[0.15em] sm:text-[15px] sm:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-brand-hover hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-full shadow-xl whitespace-nowrap"
-                  >
-                    {STORE_CONFIG.cta.label}
-                    <ExternalLinkIcon className="w-4 h-4 shrink-0" />
-                  </Link>
-
-                  <Link
-                    href={STORE_CONFIG.social.instagram.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 text-[13px] sm:text-[14px] text-cream/60 hover:text-brand transition-colors duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-brand rounded-sm"
-                  >
-                    <InstagramIcon className="w-4 h-4 shrink-0" />
-                    <span className="border-b border-cream/20 group-hover:border-brand pb-0.5 tracking-wide font-sans">
-                      {STORE_CONFIG.social.instagram.label}
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+        {/* ——— Introduction ——— */}
+        <div className="flex flex-col items-start">
+          <div className="mb-5 flex items-center gap-3">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-brand uppercase sm:text-xs">
+              {label}
+            </span>
+            <div className="h-px w-8 bg-brand/40" aria-hidden="true" />
           </div>
+
+          <h2
+            id="visit-stores-heading"
+            className="font-serif text-[30px] leading-[1.15] tracking-tight sm:text-[38px] lg:text-[44px]"
+          >
+            {heading}
+          </h2>
+
+          <p className="mt-5 max-w-2xl font-sans text-sm leading-relaxed text-muted sm:mt-6 sm:text-base">
+            {description}
+          </p>
+        </div>
+
+        {/* ——— Branches ——— */}
+        <div className={`mt-10 sm:mt-12 lg:mt-14 ${gridClassName}`}>
+          {branches.map((branch) => (
+            <BranchCard key={branch.id} branch={branch} sizes={imageSizes} />
+          ))}
+        </div>
+
+        {/* ——— Follow us ——— */}
+        <div
+          className={`mt-10 flex ${
+            isSingleBranch
+              ? "justify-center"
+              : "justify-center sm:justify-start"
+          }`}
+        >
+          <a
+            href={social.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 rounded-sm text-[13px] text-muted transition-colors duration-200 hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-sm"
+          >
+            <InstagramIcon className="h-4 w-4 shrink-0" />
+            <span className="tracking-wide border-b border-border pb-0.5 group-hover:border-brand">
+              {social.instagram.label}
+            </span>
+          </a>
         </div>
       </div>
     </section>
+  );
+}
+
+// ——— Branch card ———
+
+function BranchCard({ branch, sizes }: { branch: StoreBranch; sizes: string }) {
+  const { name, locationLabel, address, openingHours, image, mapsUrl } = branch;
+  const { description, isPlaceholder } = branch;
+
+  // Empty fields are never rendered — a half-filled branch shows only what it has.
+  const addressLines = [address.line1, address.line2].filter(
+    (line): line is string => Boolean(line && line.trim()),
+  );
+
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-sm border border-border/60 bg-surface transition-colors duration-300 hover:border-brand/40">
+      {/* ——— Photograph ——— */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-alt">
+        <BranchPhoto image={image} sizes={sizes} name={name} />
+
+        {isPlaceholder && (
+          <span className="absolute top-3 left-3 z-10 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold tracking-[0.2em] text-cream uppercase backdrop-blur-sm">
+            Placeholder photo
+          </span>
+        )}
+      </div>
+
+      {/* ——— Branch details ——— */}
+      <div className="flex flex-1 flex-col p-6 sm:p-7 lg:p-8">
+        {locationLabel && (
+          <p className="mb-3 text-[10px] font-bold tracking-[0.3em] text-brand uppercase">
+            {locationLabel}
+          </p>
+        )}
+
+        <h3 className="font-serif text-[22px] leading-tight tracking-tight text-text sm:text-[26px]">
+          {name}
+        </h3>
+
+        {description && (
+          <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
+            {description}
+          </p>
+        )}
+
+        <dl className="mt-6 flex flex-1 flex-col gap-6 border-t border-border/40 pt-6">
+          {addressLines.length > 0 && (
+            <div>
+              <dt className="mb-2 flex items-center gap-2 text-[10px] font-bold tracking-[0.3em] text-brand uppercase">
+                <MapPinIcon className="h-4 w-4 shrink-0" />
+                Location
+              </dt>
+              <dd className="font-sans text-sm leading-relaxed text-muted sm:text-[15px]">
+                <address className="not-italic">
+                  {addressLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+              </dd>
+            </div>
+          )}
+
+          {openingHours.schedule && (
+            <div>
+              <dt className="mb-2 flex items-center gap-2 text-[10px] font-bold tracking-[0.3em] text-brand uppercase">
+                <ClockIcon className="h-4 w-4 shrink-0" />
+                Hours
+              </dt>
+              <dd className="font-sans text-sm leading-relaxed text-muted sm:text-[15px]">
+                {openingHours.schedule}
+              </dd>
+            </div>
+          )}
+        </dl>
+
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Get directions to ${name} on Google Maps`}
+          className="mt-8 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand px-8 text-[12px] font-bold tracking-[0.15em] text-brand-contrast uppercase whitespace-nowrap shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-hover active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface sm:h-14 sm:text-[13px] sm:tracking-[0.2em]"
+        >
+          {STORE_CONFIG.cta.label}
+          <ExternalLinkIcon className="h-4 w-4 shrink-0" />
+        </a>
+      </div>
+    </article>
+  );
+}
+
+// ——— Photograph with graceful fallback ———
+
+function BranchPhoto({
+  image,
+  sizes,
+  name,
+}: {
+  image: StoreBranch["image"];
+  sizes: string;
+  name: string;
+}) {
+  const [hasFailed, setHasFailed] = useState(false);
+
+  if (hasFailed) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-surface-alt">
+        <Image
+          src={BRAND_SYMBOL}
+          alt=""
+          width={220}
+          height={80}
+          className="h-8 w-auto object-contain opacity-50 sm:h-10"
+        />
+        <span className="font-sans text-[10px] tracking-[0.2em] text-subtle uppercase">
+          {name}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={image.src}
+      alt={image.alt}
+      fill
+      sizes={sizes}
+      onError={() => setHasFailed(true)}
+      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+    />
   );
 }
 
