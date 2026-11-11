@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PARTNERS_CONFIG } from "@/lib/partners-config";
+import Reveal from "./animations/Reveal";
+import StaggerContainer from "./animations/StaggerContainer";
+import StaggerItem from "./animations/StaggerItem";
 
 export default function PartnersSection() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -25,43 +28,51 @@ export default function PartnersSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* ——— Editorial Introduction ——— */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-20 lg:mb-32">
-          <div className="lg:col-span-7">
-            <span className="block text-[10px] sm:text-xs tracking-[0.3em] font-bold text-brand mb-6 uppercase">
-              {PARTNERS_CONFIG.section.tagline}
-            </span>
-            <h2
-              id="partners-heading"
-              className="font-serif text-[42px] sm:text-[32px] lg:text-[48px] leading-[1.1] tracking-tight mb-8 whitespace-pre-line"
-            >
-              {PARTNERS_CONFIG.section.heading}
-            </h2>
-            <p className="font-sans text-base sm:text-lg lg:text-xl text-text/70 max-w-2xl leading-relaxed">
-              {PARTNERS_CONFIG.section.description}
-            </p>
-          </div>
+          <StaggerContainer className="lg:col-span-7">
+            <StaggerItem>
+              <span className="block text-[10px] sm:text-xs tracking-[0.3em] font-bold text-brand mb-6 uppercase">
+                {PARTNERS_CONFIG.section.tagline}
+              </span>
+            </StaggerItem>
+            <StaggerItem>
+              <h2
+                id="partners-heading"
+                className="font-serif text-[42px] sm:text-[32px] lg:text-[48px] leading-[1.1] tracking-tight mb-8 whitespace-pre-line"
+              >
+                {PARTNERS_CONFIG.section.heading}
+              </h2>
+            </StaggerItem>
+            <StaggerItem>
+              <p className="font-sans text-base sm:text-lg lg:text-xl text-text/70 max-w-2xl leading-relaxed">
+                {PARTNERS_CONFIG.section.description}
+              </p>
+            </StaggerItem>
+          </StaggerContainer>
           <div className="lg:col-span-5 flex flex-col justify-between items-end text-right">
-            <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden mb-8 hidden lg:block bg-surface">
-              <Image
-                src={PARTNERS_CONFIG.section.heroImage.src}
-                alt={PARTNERS_CONFIG.section.heroImage.alt}
-                fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                onError={(event) => {
-                  event.currentTarget.style.visibility = "hidden";
-                }}
-                className="object-cover"
-              />
-              <div className="absolute top-6 right-6 text-cream text-right">
-                <p className="font-serif italic text-lg sm:text-xl leading-snug">
-                  Better together
-                  <br />
-                  for a tastier
-                  <br />
-                  tomorrow.
-                </p>
-                <div className="h-px w-8 bg-cream/40 mt-4 ml-auto" />
+            <Reveal effect="fade-up" className="w-full hidden lg:block">
+              <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden mb-8 bg-surface">
+                <Image
+                  src={PARTNERS_CONFIG.section.heroImage.src}
+                  alt={PARTNERS_CONFIG.section.heroImage.alt}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  onError={(event) => {
+                    event.currentTarget.style.visibility = "hidden";
+                  }}
+                  className="object-cover"
+                />
+                <div className="absolute top-6 right-6 text-cream text-right">
+                  <p className="font-serif italic text-lg sm:text-xl leading-snug">
+                    Better together
+                    <br />
+                    for a tastier
+                    <br />
+                    tomorrow.
+                  </p>
+                  <div className="h-px w-8 bg-cream/40 mt-4 ml-auto" />
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
 
@@ -107,9 +118,12 @@ export default function PartnersSection() {
         </div>
 
         {/* ——— Partner Showcase Grid ——— */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 mb-32">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 mb-32">
           {filteredPartners.map((partner) => (
-            <div key={partner.id} className="group flex flex-col h-full">
+            <StaggerItem
+              key={partner.id}
+              className="group flex flex-col h-full"
+            >
               {/* Image Container */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface mb-8 rounded-sm">
                 <Image
@@ -163,12 +177,15 @@ export default function PartnersSection() {
                   </Link>
                 </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* ——— Business Enquiry CTA ——— */}
-        <div className="relative w-full overflow-hidden rounded-sm bg-surface shadow-lg lg:rounded-md border border-border/5">
+        <Reveal
+          effect="fade-up"
+          className="relative w-full overflow-hidden rounded-sm bg-surface shadow-lg lg:rounded-md border border-border/5"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
             {/* Left Content */}
             <div className="relative z-20 flex flex-col justify-center p-8 sm:p-12 lg:p-20 order-2 lg:order-1">
@@ -224,7 +241,7 @@ export default function PartnersSection() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

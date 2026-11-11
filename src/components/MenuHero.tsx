@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { MENU_CONFIG } from "@/lib/menu-config";
+import TextReveal from "./animations/TextReveal";
 
 export default function MenuHero() {
   const { heading, subtitle, image } = MENU_CONFIG.hero;
@@ -25,12 +26,25 @@ export default function MenuHero() {
 
         {/* Text Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-8">
-          <h1 className="font-serif text-[48px] sm:text-[72px] lg:text-[96px] text-[#FFF1CC] leading-tight tracking-tight drop-shadow-lg animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <TextReveal
+            as="h1"
+            effect="fade-up"
+            duration={0.9}
+            distance={32}
+            className="font-serif text-[48px] sm:text-[72px] lg:text-[96px] leading-tight tracking-tight text-[#FFF1CC] drop-shadow-lg"
+          >
             {heading}
-          </h1>
-          <p className="mt-4 font-sans text-[16px] sm:text-[20px] lg:text-[24px] text-[#FFF1CC] italic tracking-wide animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
+          </TextReveal>
+          <TextReveal
+            as="p"
+            effect="fade-up"
+            duration={0.9}
+            distance={24}
+            delay={0.2}
+            className="mt-4 font-sans text-[16px] sm:text-[20px] lg:text-[24px] text-[#FFF1CC] italic tracking-wide"
+          >
             {subtitle}
-          </p>
+          </TextReveal>
         </div>
       </div>
     </section>

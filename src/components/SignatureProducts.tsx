@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Reveal from "./animations/Reveal";
+import StaggerContainer from "./animations/StaggerContainer";
+import StaggerItem from "./animations/StaggerItem";
 
 interface Product {
   id: number;
@@ -197,46 +200,54 @@ export default function SignatureProducts() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* ——— LEFT: Introduction ——— */}
           <div className="lg:col-span-4 flex flex-col items-start relative">
-            <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-brand font-semibold mb-6">
-              Signature Products
-            </span>
+            <Reveal effect="fade-up" distance={12} className="mb-6">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-brand font-semibold">
+                Signature Products
+              </span>
+            </Reveal>
 
-            <h2
-              id="signature-heading"
-              className="font-serif text-[36px] leading-[1.1] sm:text-[44px] lg:text-[52px] font-medium text-text tracking-tight"
-            >
-              Crafted with Passion,
-              <br className="hidden sm:block" /> Baked for You
-            </h2>
-
-            <p className="mt-8 text-[15px] sm:text-[16px] leading-[1.75] text-muted max-w-md">
-              From our buttery croissants to artisanal breads and delicate
-              pastries, every item is made with care, using the finest
-              ingredients and time-honored French techniques.
-            </p>
-
-            <div className="mt-6 sm:mt-8 flex items-center gap-4 sm:gap-6 group">
-              {/* Cherub Decoration */}
-              <div className="relative w-24 sm:w-28 lg:w-32 aspect-square opacity-90 dark:opacity-80 shrink-0">
-                <Image
-                  src="/Brand_Identity/Key_Visual/03_cherub.png"
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  sizes="(max-width: 640px) 96px, (max-width: 1024px) 112px, 128px"
-                  className="object-contain object-left select-none"
-                  draggable={false}
-                />
-              </div>
-
-              <Link
-                href="/menu"
-                className="inline-flex items-center gap-2 text-[14px] sm:text-[15px] font-semibold text-brand transition-colors duration-200 hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
+            <Reveal effect="fade-up" delay={0.08}>
+              <h2
+                id="signature-heading"
+                className="font-serif text-[36px] leading-[1.1] sm:text-[44px] lg:text-[52px] font-medium text-text tracking-tight"
               >
-                Explore Our Menu
-                <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
-              </Link>
-            </div>
+                Crafted with Passion,
+                <br className="hidden sm:block" /> Baked for You
+              </h2>
+            </Reveal>
+
+            <Reveal effect="fade-up" delay={0.16}>
+              <p className="mt-8 text-[15px] sm:text-[16px] leading-[1.75] text-muted max-w-md">
+                From our buttery croissants to artisanal breads and delicate
+                pastries, every item is made with care, using the finest
+                ingredients and time-honored French techniques.
+              </p>
+            </Reveal>
+
+            <Reveal effect="fade-up" delay={0.24}>
+              <div className="mt-6 sm:mt-8 flex items-center gap-4 sm:gap-6 group">
+                {/* Cherub Decoration */}
+                <div className="relative w-24 sm:w-28 lg:w-32 aspect-square opacity-90 dark:opacity-80 shrink-0">
+                  <Image
+                    src="/Brand_Identity/Key_Visual/03_cherub.png"
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    sizes="(max-width: 640px) 96px, (max-width: 1024px) 112px, 128px"
+                    className="object-contain object-left select-none"
+                    draggable={false}
+                  />
+                </div>
+
+                <Link
+                  href="/menu"
+                  className="inline-flex items-center gap-2 text-[14px] sm:text-[15px] font-semibold text-brand transition-colors duration-200 hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
+                >
+                  Explore Our Menu
+                  <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+            </Reveal>
           </div>
 
           {/* ——— RIGHT: Product Gallery ——— */}
@@ -272,14 +283,14 @@ export default function SignatureProducts() {
             </div>
 
             {/* Cards Scroll Container */}
-            <div
+            <StaggerContainer
               ref={scrollRef}
               onScroll={handleScroll}
               className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-5 px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 gap-6 sm:gap-8"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {PRODUCTS.map((product) => (
-                <div
+                <StaggerItem
                   key={product.id}
                   className="flex-none w-70 sm:w-[calc(50%-16px)] lg:w-[calc(25%-18px)] snap-start group"
                 >
@@ -313,9 +324,9 @@ export default function SignatureProducts() {
                       <ArrowRightIcon className="w-3.5 h-3.5" />
                     </Link>
                   </div>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </div>
       </div>

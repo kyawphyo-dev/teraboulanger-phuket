@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { MENU_CONFIG } from "@/lib/menu-config";
 import type {
@@ -8,6 +7,9 @@ import type {
   MenuItem,
   MenuSectionConfig,
 } from "@/lib/menu-config";
+import ImageReveal from "./animations/ImageReveal";
+import StaggerContainer from "./animations/StaggerContainer";
+import StaggerItem from "./animations/StaggerItem";
 
 const CATEGORY_PAGE_ROUTES: Partial<Record<MenuCategory, string>> = {
   Croissant: "/menu/croissants",
@@ -45,12 +47,13 @@ function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group flex flex-col">
       <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-surface mb-4 sm:mb-5 lg:mb-6 border border-border/30">
-        <Image
+        <ImageReveal
           src={product.image.src}
           alt={product.image.alt}
-          fill
+          effect="clip"
           sizes="(max-width: 767px) 46vw, (max-width: 1023px) 22vw, 24vw"
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+          className="h-full w-full"
+          imageClassName="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
       </div>
@@ -86,39 +89,49 @@ function MenuSection({ section, items }: MenuSectionProps) {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-16">
           {/* Section Info */}
-          <div className="md:col-span-4 lg:col-span-3 flex flex-col items-start">
-            <span className="text-[11px] uppercase tracking-[0.3em] text-brand font-bold mb-5 sm:mb-6">
-              {section.label}
-            </span>
-            <h2 className="font-serif text-[32px] sm:text-[42px] md:text-[32px] lg:text-[42px] leading-tight font-medium text-text mb-5 sm:mb-6">
-              {section.heading}
-            </h2>
-            <p className="text-[14px] sm:text-[15px] leading-relaxed text-muted mb-6 sm:mb-8 max-w-xs">
-              {section.description}
-            </p>
-            {categoryPageHref ? (
-              <Link
-                href={categoryPageHref}
-                className="group inline-flex items-center gap-2 text-[12px] sm:text-[13px] uppercase tracking-[0.15em] font-bold text-brand hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-              >
-                {section.viewAllLabel}
-                <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            ) : (
-              <button className="group inline-flex items-center gap-2 text-[12px] sm:text-[13px] uppercase tracking-[0.15em] font-bold text-brand hover:text-brand transition-colors">
-                {section.viewAllLabel}
-                <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-            )}
-          </div>
+          <StaggerContainer className="md:col-span-4 lg:col-span-3 flex flex-col items-start">
+            <StaggerItem className="mb-5 sm:mb-6">
+              <span className="text-[11px] uppercase tracking-[0.3em] text-brand font-bold">
+                {section.label}
+              </span>
+            </StaggerItem>
+            <StaggerItem className="mb-5 sm:mb-6">
+              <h2 className="font-serif text-[32px] sm:text-[42px] md:text-[32px] lg:text-[42px] leading-tight font-medium text-text">
+                {section.heading}
+              </h2>
+            </StaggerItem>
+            <StaggerItem className="mb-6 sm:mb-8">
+              <p className="text-[14px] sm:text-[15px] leading-relaxed text-muted max-w-xs">
+                {section.description}
+              </p>
+            </StaggerItem>
+            <StaggerItem>
+              {categoryPageHref ? (
+                <Link
+                  href={categoryPageHref}
+                  className="group inline-flex items-center gap-2 text-[12px] sm:text-[13px] uppercase tracking-[0.15em] font-bold text-brand hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                >
+                  {section.viewAllLabel}
+                  <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              ) : (
+                <button className="group inline-flex items-center gap-2 text-[12px] sm:text-[13px] uppercase tracking-[0.15em] font-bold text-brand hover:text-brand transition-colors">
+                  {section.viewAllLabel}
+                  <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              )}
+            </StaggerItem>
+          </StaggerContainer>
 
           {/* Product Grid */}
           <div className="md:col-span-8 lg:col-span-9">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 md:gap-x-5 lg:gap-x-8 gap-y-10 lg:gap-y-12">
+            <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 md:gap-x-5 lg:gap-x-8 gap-y-10 lg:gap-y-12">
               {items.map((item) => (
-                <ProductCard key={item.id} product={item} />
+                <StaggerItem key={item.id}>
+                  <ProductCard product={item} />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </div>
       </div>
