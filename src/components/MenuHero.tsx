@@ -9,17 +9,19 @@ export default function MenuHero() {
   return (
     <section className="relative w-full bg-bg overflow-hidden border-b border-border/50">
       <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh]">
-        {/* Background Image */}
+        {/* Background Image — object-cover + object-center mirrors
+            background-size: cover / background-position: center */}
         <Image
           src={image}
-          alt="Premium Croissant Hero"
+          alt="Fresh croissants on the bakery counter"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center"
         />
-        
+
         {/* Overlay Gradient for Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-black/50" />
 
         {/* Text Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-8">
