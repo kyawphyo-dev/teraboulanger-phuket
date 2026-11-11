@@ -1,5 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
+import ImageReveal from "./animations/ImageReveal";
+import StaggerContainer from "./animations/StaggerContainer";
+import StaggerItem from "./animations/StaggerItem";
 
 /**
  * Our Craft & Ingredients — editorial photo collage.
@@ -79,66 +81,71 @@ export default function CraftIngredients() {
           <div className="grid grid-cols-12 gap-3 sm:gap-4 lg:col-span-7">
             {/* Primary anchor photograph */}
             <div className="col-span-12 sm:col-span-7">
-              <div className="relative aspect-4/5 overflow-hidden bg-surface">
-                <Image
-                  src={PRIMARY_PHOTO.src}
-                  alt={PRIMARY_PHOTO.alt}
-                  fill
-                  sizes={PRIMARY_PHOTO.sizes}
-                  className="object-cover object-center"
-                />
-              </div>
+              <ImageReveal
+                src={PRIMARY_PHOTO.src}
+                alt={PRIMARY_PHOTO.alt}
+                effect="clip"
+                sizes={PRIMARY_PHOTO.sizes}
+                className="aspect-4/5 bg-surface"
+                imageClassName="object-cover object-center"
+              />
             </div>
 
             {/* Supporting pair — side by side on mobile, stacked and offset on
                 wider screens */}
             <div className="col-span-12 grid grid-cols-2 gap-3 sm:col-span-5 sm:grid-cols-1 sm:gap-4 sm:pt-8 lg:pt-12">
-              {SUPPORTING_PHOTOS.map((photo) => (
-                <div
+              {SUPPORTING_PHOTOS.map((photo, index) => (
+                <ImageReveal
                   key={photo.src}
-                  className="relative aspect-4/3 overflow-hidden bg-surface"
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes={photo.sizes}
-                    className="object-cover object-center"
-                  />
-                </div>
+                  src={photo.src}
+                  alt={photo.alt}
+                  effect="clip"
+                  delay={0.15 * (index + 1)}
+                  sizes={photo.sizes}
+                  className="aspect-4/3 bg-surface"
+                  imageClassName="object-cover object-center"
+                />
               ))}
             </div>
           </div>
 
           {/* ——— RIGHT: editorial copy ——— */}
-          <div className="lg:col-span-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-brand sm:text-xs">
-              Our Craft & Ingredients
-            </p>
+          <StaggerContainer className="lg:col-span-5">
+            <StaggerItem>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-brand sm:text-xs">
+                Our Craft &amp; Ingredients
+              </p>
+            </StaggerItem>
 
-            <h2
-              id="craft-heading"
-              className="mt-5 font-serif text-[32px] font-medium leading-[1.14] tracking-tight text-text sm:text-[38px] lg:text-[44px]"
-            >
-              The Art Behind
-              <br className="hidden sm:block" /> Every Bake
-            </h2>
-
-            <p className="mt-5 max-w-md text-[15px] leading-[1.75] text-muted sm:text-[16px]">
-              From carefully selected ingredients to the patience of working
-              with dough, every detail is part of our approach to French baking.
-            </p>
-
-            <div className="mt-8">
-              <Link
-                href={ABOUT_CRAFT_HREF}
-                className="group inline-flex items-center gap-2 rounded-sm text-[14px] font-semibold text-brand transition-colors duration-200 hover:text-brand-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
+            <StaggerItem>
+              <h2
+                id="craft-heading"
+                className="mt-5 font-serif text-[32px] font-medium leading-[1.14] tracking-tight text-text sm:text-[38px] lg:text-[44px]"
               >
-                Discover Our Craft
-                <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
-              </Link>
-            </div>
-          </div>
+                The Art Behind
+                <br className="hidden sm:block" /> Every Bake
+              </h2>
+            </StaggerItem>
+
+            <StaggerItem>
+              <p className="mt-5 max-w-md text-[15px] leading-[1.75] text-muted sm:text-[16px]">
+                From carefully selected ingredients to the patience of working
+                with dough, every detail is part of our approach to French baking.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="mt-8">
+                <Link
+                  href={ABOUT_CRAFT_HREF}
+                  className="group inline-flex items-center gap-2 rounded-sm text-[14px] font-semibold text-brand transition-colors duration-200 hover:text-brand-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
+                >
+                  Discover Our Craft
+                  <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
       </div>
     </section>

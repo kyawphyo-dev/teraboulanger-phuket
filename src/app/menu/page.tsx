@@ -16,14 +16,20 @@ export default function MenuPage() {
       <MenuHero />
 
       {/* Category Navigation */}
-      <CategoryNav 
-        activeCategory={activeCategory} 
-        onCategoryChange={setActiveCategory} 
+      <CategoryNav
+        activeCategory={activeCategory}
+        onCategoryChange={setActiveCategory}
       />
 
       {/* Menu Sections Grid */}
       <main className="flex-1">
         <MenuGrid activeCategory={activeCategory} />
+
+        {/* Temporary photography notice — remove once official product photography is in place. */}
+        <p className="mx-auto max-w-7xl px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12 text-center text-[12px] leading-relaxed text-muted">
+          Product photography is shown for illustration purposes only. Menu
+          items and pricing are subject to change.
+        </p>
       </main>
 
       {/* Visit Store Section - Reused from homepage if appropriate */}

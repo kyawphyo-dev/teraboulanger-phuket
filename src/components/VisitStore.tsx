@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { STORE_CONFIG, type StoreBranch } from "@/lib/store-config";
+import Reveal from "./animations/Reveal";
+import StaggerContainer from "./animations/StaggerContainer";
+import StaggerItem from "./animations/StaggerItem";
 
 const BRAND_SYMBOL = "/Brand_Identity/Logo/logo_symbol_orange.png";
 
@@ -45,7 +48,7 @@ export default function VisitStore() {
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* ——— Introduction ——— */}
-        <div className="flex flex-col items-start">
+        <Reveal effect="fade-up" className="flex flex-col items-start">
           <div className="mb-5 flex items-center gap-3">
             <span className="text-[10px] font-bold tracking-[0.3em] text-brand uppercase sm:text-xs">
               {label}
@@ -63,17 +66,20 @@ export default function VisitStore() {
           <p className="mt-5 max-w-2xl font-sans text-sm leading-relaxed text-muted sm:mt-6 sm:text-base">
             {description}
           </p>
-        </div>
+        </Reveal>
 
         {/* ——— Branches ——— */}
-        <div className={`mt-10 sm:mt-12 lg:mt-14 ${gridClassName}`}>
+        <StaggerContainer className={`mt-10 sm:mt-12 lg:mt-14 ${gridClassName}`}>
           {branches.map((branch) => (
-            <BranchCard key={branch.id} branch={branch} sizes={imageSizes} />
+            <StaggerItem key={branch.id} className="h-full">
+              <BranchCard branch={branch} sizes={imageSizes} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* ——— Follow us ——— */}
-        <div
+        <Reveal
+          effect="fade-up"
           className={`mt-10 flex ${
             isSingleBranch
               ? "justify-center"
@@ -91,7 +97,7 @@ export default function VisitStore() {
               {social.instagram.label}
             </span>
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

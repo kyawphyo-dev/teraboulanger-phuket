@@ -1,5 +1,14 @@
 /**
  * Menu configuration for Tera Boulanger Phuket.
+ *
+ * NOTE: All product photography lives in `/public/images/menu/` and is
+ * TEMPORARY stock imagery used as a visual reference only. It must never be
+ * presented as actual Tera Boulanger product photography. Swap each `image.src`
+ * for the official photograph once it is available — no component changes are
+ * needed.
+ *
+ * Product names, descriptions and prices are placeholder content awaiting
+ * confirmation from the owner.
  */
 
 export type MenuCategory = "All" | "Croissant" | "Pastry" | "Cake" | "Beverage";
@@ -32,7 +41,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Flaky, buttery, and golden brown.",
     price: "120.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20classic%20french%20croissant%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/croissant-classic.jpg",
       alt: "Classic Croissant",
     },
     category: "Croissant",
@@ -43,7 +52,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Twice-baked with almond cream and sliced almonds.",
     price: "160.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20almond%20croissant%20with%20powdered%20sugar%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/croissant-almond.jpg",
       alt: "Almond Croissant",
     },
     category: "Croissant",
@@ -54,7 +63,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Classic buttery pastry with rich chocolate center.",
     price: "140.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20pain%20au%20chocolat%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/croissant-pain-au-chocolat.jpg",
       alt: "Pain au Chocolat",
     },
     category: "Croissant",
@@ -66,7 +75,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Sweet pastry swirl with plump raisins.",
     price: "150.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20raisin%20danish%20pastry%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/pastry-raisin-danish.jpg",
       alt: "Raisin Danish",
     },
     category: "Pastry",
@@ -77,7 +86,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Spiced cinnamon filling with light glaze.",
     price: "150.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20cinnamon%20roll%20with%20glaze%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/pastry-cinnamon-roll.jpg",
       alt: "Cinnamon Roll",
     },
     category: "Pastry",
@@ -88,7 +97,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Buttery pastry with fresh seasonal berries.",
     price: "160.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20berry%20danish%20pastry%20with%20fresh%20fruits%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/pastry-berry-danish.jpg",
       alt: "Berry Danish",
     },
     category: "Pastry",
@@ -100,7 +109,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Light sponge with fresh cream and strawberries.",
     price: "180.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20strawberry%20shortcake%20slice%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/cake-strawberry-shortcake.jpg",
       alt: "Strawberry Shortcake",
     },
     category: "Cake",
@@ -111,7 +120,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Rich dark chocolate mousse cake.",
     price: "180.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20rich%20chocolate%20mousse%20cake%20slice%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/cake-chocolate.jpg",
       alt: "Chocolate Délice",
     },
     category: "Cake",
@@ -122,7 +131,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Premium Japanese matcha green tea cake.",
     price: "170.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20japanese%20matcha%20green%20tea%20cake%20slice%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/cake-matcha.jpg",
       alt: "Matcha Cake",
     },
     category: "Cake",
@@ -134,7 +143,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Smooth espresso with steamed milk.",
     price: "120.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20hot%20cafe%20latte%20with%20art%20in%20glass%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/beverage-latte.jpg",
       alt: "Latte",
     },
     category: "Beverage",
@@ -145,7 +154,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Refreshing chilled espresso with water.",
     price: "100.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20iced%20americano%20coffee%20in%20glass%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/beverage-iced-americano.jpg",
       alt: "Iced Americano",
     },
     category: "Beverage",
@@ -156,7 +165,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Premium matcha with creamy milk.",
     price: "170.-",
     image: {
-      src: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20iced%20matcha%20latte%20in%20glass%20on%20marble%20table%20high%20end%20bakery%20photography&image_size=landscape_4_3",
+      src: "/images/menu/beverage-matcha-latte.jpg",
       alt: "Matcha Latte",
     },
     category: "Beverage",
@@ -198,9 +207,15 @@ export const MENU_CONFIG = {
   hero: {
     heading: "Our Menu",
     subtitle: "A taste of Paris, in Phuket.",
-    image: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=ultra%20premium%20croissant%20close%20up%20on%20marble%20table%20warm%20lighting%20french%20bakery%20atmosphere&image_size=landscape_16_9",
+    image: "/images/menu/hero/menu_hero.jpg",
   },
-  categories: ["All", "Croissant", "Pastry", "Cake", "Beverage"] as MenuCategory[],
+  categories: [
+    "All",
+    "Croissant",
+    "Pastry",
+    "Cake",
+    "Beverage",
+  ] as MenuCategory[],
   items: MENU_ITEMS,
   sections: MENU_SECTIONS,
 };

@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import Reveal from "./animations/Reveal";
+import StaggerContainer from "./animations/StaggerContainer";
+import StaggerItem from "./animations/StaggerItem";
 
 /**
  * Brand Introduction / Philosophy section.
@@ -94,38 +97,40 @@ export default function BrandIntro() {
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           {/* ——— LEFT: photographic collage (faithful to reference) ——— */}
           <div className="lg:col-span-7">
-            <div
-              className="grid grid-cols-3 grid-rows-10 gap-1.5 bg-bg sm:gap-2 aspect-4/5 sm:aspect-5/6"
-              role="img"
-              aria-label="Teraboulanger brand collage"
-            >
-              {COLLAGE_SLOTS.map((slot) => (
-                <div
-                  key={slot.src}
-                  className="relative overflow-hidden"
-                  style={{
-                    gridColumn: slot.col,
-                    gridRow: slot.row,
-                  }}
-                >
-                  <Image
-                    src={slot.src}
-                    alt={slot.alt}
-                    fill
-                    sizes="(max-width: 1024px) 33vw, 30vw"
-                    className="object-cover"
-                    style={{ objectPosition: slot.objectPosition }}
-                  />
-                </div>
-              ))}
-            </div>
+            <Reveal effect="fade-up">
+              <div
+                className="grid grid-cols-3 grid-rows-10 gap-1.5 bg-bg sm:gap-2 aspect-4/5 sm:aspect-5/6"
+                role="img"
+                aria-label="Teraboulanger brand collage"
+              >
+                {COLLAGE_SLOTS.map((slot) => (
+                  <div
+                    key={slot.src}
+                    className="relative overflow-hidden"
+                    style={{
+                      gridColumn: slot.col,
+                      gridRow: slot.row,
+                    }}
+                  >
+                    <Image
+                      src={slot.src}
+                      alt={slot.alt}
+                      fill
+                      sizes="(max-width: 1024px) 33vw, 30vw"
+                      className="object-cover"
+                      style={{ objectPosition: slot.objectPosition }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </Reveal>
           </div>
 
           {/* ——— RIGHT: text content ——— */}
-          <div className="lg:col-span-5">
+          <StaggerContainer className="lg:col-span-5">
             {/* Phoenix key visual — centred above the eyebrow, its transparent
                 lower margin overlapping the eyebrow's leading space only. */}
-            <div className="relative -mb-1 flex justify-center sm:-mb-2">
+            <StaggerItem className="relative -mb-1 flex justify-center sm:-mb-2">
               <Image
                 src="/Brand_Identity/Key_Visual/02_phoenix.png"
                 alt=""
@@ -135,49 +140,57 @@ export default function BrandIntro() {
                 className="h-auto w-28 select-none sm:w-32 lg:w-36"
                 draggable={false}
               />
-            </div>
+            </StaggerItem>
 
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand sm:text-xs">
-              The Teraboulanger Philosophy
-            </p>
+            <StaggerItem>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand sm:text-xs">
+                The Teraboulanger Philosophy
+              </p>
+            </StaggerItem>
 
-            <h2
-              id="brand-intro-heading"
-              className="mt-4 font-serif text-3xl font-semibold leading-[1.08] text-text sm:text-4xl lg:text-[2.75rem]"
-            >
-              The art of everyday baking.
-            </h2>
-
-            <p className="mt-5 text-base leading-relaxed text-text-muted sm:text-lg">
-              A thoughtful approach to baking, where craftsmanship and
-              life&apos;s everyday moments come together.
-            </p>
-
-            <div className="mt-8">
-              <Link
-                href="/our-story"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
+            <StaggerItem>
+              <h2
+                id="brand-intro-heading"
+                className="mt-4 font-serif text-3xl font-semibold leading-[1.08] text-text sm:text-4xl lg:text-[2.75rem]"
               >
-                Discover Our Story
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="transition-transform duration-200 group-hover:translate-x-0.5"
+                The art of everyday baking.
+              </h2>
+            </StaggerItem>
+
+            <StaggerItem>
+              <p className="mt-5 text-base leading-relaxed text-text-muted sm:text-lg">
+                A thoughtful approach to baking, where craftsmanship and
+                life&apos;s everyday moments come together.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="mt-8">
+                <Link
+                  href="/our-story"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
                 >
-                  <path
-                    d="M5 12h14m-6-6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
-            </div>
-          </div>
+                  Discover Our Story
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover:translate-x-0.5"
+                  >
+                    <path
+                      d="M5 12h14m-6-6l6 6-6 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
       </div>
     </section>

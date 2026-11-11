@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { TESTIMONIALS_CONFIG } from "@/lib/testimonials-config";
+import Reveal from "./animations/Reveal";
 
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,7 +47,10 @@ export default function TestimonialsSection() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* ——— Level 1: Introduction ——— */}
-        <div className="w-full pb-10 lg:pb-14 mb-8 lg:mb-10 border-b border-border/10">
+        <Reveal
+          effect="fade-up"
+          className="w-full pb-10 lg:pb-14 mb-8 lg:mb-10 border-b border-border/10"
+        >
           <div className="flex items-center gap-3 mb-5">
             <span className="text-[10px] sm:text-xs tracking-[0.3em] font-bold text-brand uppercase">
               {TESTIMONIALS_CONFIG.section.tagline}
@@ -64,10 +68,14 @@ export default function TestimonialsSection() {
           <p className="w-full font-sans text-sm sm:text-base text-muted leading-relaxed mt-6">
             {TESTIMONIALS_CONFIG.section.description}
           </p>
-        </div>
+        </Reveal>
 
         {/* ——— Level 2: Testimonial content ——— */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <Reveal
+          effect="fade-up"
+          delay={0.1}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
+        >
           {/* Left: Quote, attribution & controls */}
           <div className="lg:col-span-7">
             <div
@@ -176,7 +184,7 @@ export default function TestimonialsSection() {
               <div className="absolute inset-0 bg-black/5 dark:bg-white/5 pointer-events-none" />
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

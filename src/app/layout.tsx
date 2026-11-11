@@ -5,6 +5,8 @@ import { ThemeProvider, ThemeInitScript } from "../components/ThemeProvider";
 import AnnouncementBar from "../components/AnnouncementBar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import MotionProvider from "../components/animations/MotionProvider";
+import PageTransition from "../components/animations/PageTransition";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -100,13 +102,22 @@ export default function RootLayout({
     >
       <head>
         <ThemeInitScript />
+        <noscript>
+          {/* Without JavaScript the inline `initial` styles from Motion never
+              resolve, so reveal wrappers fall back to their visible state. */}
+          <style>{`.tb-reveal{opacity:1 !important;transform:none !important;clip-path:none !important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col bg-bg text-text font-sans antialiased">
         <ThemeProvider defaultMode="dark">
-          <AnnouncementBar />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <MotionProvider>
+            <AnnouncementBar />
+            <Navbar />
+            <main className="flex-1">
+              <PageTransition>{children}</PageTransition>
+            </main>
+            <Footer />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>
