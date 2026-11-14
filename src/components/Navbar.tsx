@@ -3,7 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import AnimatedNavLink from "./navigation/AnimatedNavLink";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -14,6 +16,17 @@ const NAV_LINKS = [
 ];
 
 const MASTER_LOGO_ORANGE = "/Brand_Identity/Logo/master_logo_orange.png";
+
+/**
+ * Derives the active state from the current route rather than storing it.
+ *
+ * The home link matches only `/`; every other link also stays active on its
+ * nested routes, so `/menu/croissants` keeps "Menu" highlighted.
+ */
+function isActiveRoute(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 function ChevronRight({ className = "" }: { className?: string }) {
   return (
@@ -37,6 +50,7 @@ function ChevronRight({ className = "" }: { className?: string }) {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -112,17 +126,24 @@ export default function Navbar() {
           </Link>
 
           <ul className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1.5">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="relative px-4 py-2 text-[14px] font-medium text-text/85 hover:text-brand transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded group"
-                >
-                  {link.label}
-                  <span className="absolute left-1/2 -bottom-0.5 h-[1.5px] w-0 -translate-x-1/2 bg-brand transition-all duration-300 ease-out group-hover:w-7" />
-                </Link>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = isActiveRoute(pathname, link.href);
+              return (
+                <li key={link.href}>
+                  <AnimatedNavLink
+                    href={link.href}
+                    active={active}
+                    group="navbar"
+                    underlineClassName="inset-x-4 -bottom-0.5 h-[1.5px]"
+                    className={`relative rounded px-4 py-2 text-[14px] font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg group ${
+                      active ? "text-brand" : "text-text/85 hover:text-brand"
+                    }`}
+                  >
+                    {link.label}
+                  </AnimatedNavLink>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
@@ -194,34 +215,45 @@ export default function Navbar() {
           >
             <div className="pt-20 pb-8 px-5 sm:px-8">
               <ul className="flex flex-col">
-                {NAV_LINKS.map((link, index) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`group flex items-center justify-between py-4 border-b border-border last:border-b-0 transition-all duration-300 ${
-                        isMenuOpen
-                          ? "opacity-100 translate-x-0"
-                          : "opacity-0 -translate-x-2"
-                      }`}
-                      style={{
-                        transitionDelay: isMenuOpen
-                          ? `${index * 50 + 50}ms`
-                          : "0ms",
-                      }}
-                    >
-                      <span className="text-[17px] font-medium text-text group-hover:text-brand transition-colors duration-200">
-                        {link.label}
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="text-brand/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand"
+                {NAV_LINKS.map((link, index) => {
+                  const active = isActiveRoute(pathname, link.href);
+                  return (
+                    <li key={link.href}>
+                      <AnimatedNavLink
+                        href={link.href}
+                        active={active}
+                        group="navbar-mobile"
+                        onClick={() => setIsMenuOpen(false)}
+                        hoverUnderlineClassName={null}
+                        underlineClassName="left-0 bottom-0 h-[2px] w-10"
+                        className={`group relative flex items-center justify-between py-4 border-b border-border last:border-b-0 transition-all duration-300 ${
+                          isMenuOpen
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-2"
+                        }`}
+                        style={{
+                          transitionDelay: isMenuOpen
+                            ? `${index * 50 + 50}ms`
+                            : "0ms",
+                        }}
                       >
-                        <ChevronRight />
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+                        <span
+                          className={`text-[17px] font-medium transition-colors duration-200 ${
+                            active ? "text-brand" : "text-text group-hover:text-brand"
+                          }`}
+                        >
+                          {link.label}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="text-brand/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand"
+                        >
+                          <ChevronRight />
+                        </span>
+                      </AnimatedNavLink>
+                    </li>
+                  );
+                })}
               </ul>
               <div
                 className={`mt-8 transition-all duration-300 ${

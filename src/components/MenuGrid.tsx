@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "motion/react";
 import { MENU_CONFIG } from "@/lib/menu-config";
 import type {
   MenuCategory,
   MenuItem,
   MenuSectionConfig,
 } from "@/lib/menu-config";
+import { MOTION, MOTION_EASE, withRevealClass } from "@/lib/motion-presets";
 import ImageReveal from "./animations/ImageReveal";
 import StaggerContainer from "./animations/StaggerContainer";
 import StaggerItem from "./animations/StaggerItem";
@@ -150,12 +152,23 @@ export default function MenuGrid({ activeCategory }: MenuGridProps) {
 
   return (
     <div className="bg-bg">
-      {filteredSections.map((section) => {
-        const items = MENU_CONFIG.items.filter(
-          (item) => item.category === section.id,
-        );
-        return <MenuSection key={section.id} section={section} items={items} />;
-      })}
+      {/* Keyed on the selected category: the filtered content swaps in a single
+          commit (no exit animation, so the page below never jumps) and settles
+          in with a short fade and a small rise. */}
+      <motion.div
+        key={activeCategory}
+        className={withRevealClass()}
+        initial={{ opacity: 0, y: MOTION.page.distance }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: MOTION.page.duration, ease: MOTION_EASE }}
+      >
+        {filteredSections.map((section) => {
+          const items = MENU_CONFIG.items.filter(
+            (item) => item.category === section.id,
+          );
+          return <MenuSection key={section.id} section={section} items={items} />;
+        })}
+      </motion.div>
     </div>
   );
 }
