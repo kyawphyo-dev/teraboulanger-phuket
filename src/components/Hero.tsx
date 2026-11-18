@@ -2,42 +2,53 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import Reveal from "./animations/Reveal";
 import StaggerContainer from "./animations/StaggerContainer";
 import StaggerItem from "./animations/StaggerItem";
 
 interface Slide {
+  id: string;
   src: string;
   alt: string;
-  category: string;
+  label: string;
   caption: string;
 }
 
+/**
+ * Temporary external reference photography for the hero carousel. The client
+ * will supply official Tera Boulanger shots later — swapping each `src` is all
+ * that is required, the branded fallback keeps the frame intact meanwhile.
+ */
 const SLIDES: Slide[] = [
   {
-    src: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format&fit=crop",
-    alt: "Freshly baked butter croissants on a wooden board",
-    category: "Signature Pastry",
-    caption: "Butter croissant — a French bakery classic.",
+    id: "croissants",
+    src: "https://images.unsplash.com/photo-1763207291707-e2cf471ed72b?auto=format&fit=crop&w=1800&q=85",
+    alt: "Freshly baked butter croissants with golden laminated layers",
+    label: "Signature Croissants",
+    caption: "Buttery layers, golden crusts and the art of French lamination.",
   },
   {
-    src: "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=1200&q=80&auto=format&fit=crop",
-    alt: "Inside a French bakery with pastries on display",
-    category: "Inside Tera",
-    caption: "A closer look at our bakery in Phuket.",
+    id: "artisan-breads",
+    src: "https://images.unsplash.com/photo-1562099870-a3c3f2f3b44d?auto=format&fit=crop&w=1800&q=85",
+    alt: "Artisan sourdough and freshly baked bread loaves",
+    label: "Artisan Breads",
+    caption:
+      "From naturally fermented sourdough to soft brioche and Japanese shokupan.",
   },
   {
-    src: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1200&q=80&auto=format&fit=crop",
-    alt: "Bakery storefront with fresh bread and pastries",
-    category: "Visit Us",
-    caption: "Explore our bakery in the heart of Phuket.",
+    id: "pastries-cookies",
+    src: "https://images.unsplash.com/photo-1769138885126-701ffae94ee3?auto=format&fit=crop&w=1800&q=85",
+    alt: "Assorted pastries and freshly baked cookies",
+    label: "Pastries & Cookies",
+    caption: "A collection of freshly baked treats for every occasion.",
   },
   {
-    src: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&q=80&auto=format&fit=crop",
-    alt: "Artisan sourdough bread loaves cooling on a rack",
-    category: "Artisan Breads",
-    caption: "Slow-fermented breads, baked fresh daily.",
+    id: "coffee-cafe",
+    src: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1800&q=85",
+    alt: "Freshly prepared coffee served at the café",
+    label: "Coffee & Café",
+    caption: "Thoughtfully prepared coffee and refreshing beverages.",
   },
 ];
 
@@ -106,8 +117,8 @@ function MapPinIcon({ className = "" }: { className?: string }) {
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   const count = SLIDES.length;
-  const regionRef = useRef<HTMLDivElement>(null);
 
   const goNext = useCallback(() => {
     setCurrent((prev) => (prev + 1) % count);
@@ -119,6 +130,11 @@ export default function Hero() {
 
   const goTo = useCallback((index: number) => {
     setCurrent(index);
+  }, []);
+
+  /** Reveal the branded fallback if a reference photo fails to load. */
+  const markFailed = useCallback((id: string) => {
+    setFailedImages((prev) => (prev[id] ? prev : { ...prev, [id]: true }));
   }, []);
 
   const handleKeyDown = useCallback(
@@ -139,16 +155,17 @@ export default function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative w-full bg-bg text-text overflow-hidden"
+      className="relative w-full overflow-hidden bg-bg text-text"
     >
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16 lg:pt-20 pb-14 sm:pb-12 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          <StaggerContainer className="lg:col-span-5 xl:col-span-5 flex flex-col items-start">
+      <div className="relative mx-auto w-full max-w-7xl px-5 pt-12 pb-14 sm:px-8 sm:pt-16 sm:pb-16 lg:px-12 lg:pt-20 lg:pb-24">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14">
+          {/* ——— LEFT: brand introduction ——— */}
+          <StaggerContainer className="flex flex-col items-start lg:col-span-5">
             <StaggerItem className="mb-7 sm:mb-9" distance={16}>
-              <span className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs uppercase tracking-[0.3em] text-brand font-semibold">
+              <span className="inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-brand sm:text-xs">
                 <span
                   aria-hidden="true"
-                  className="inline-block w-10 h-px bg-brand"
+                  className="inline-block h-px w-10 bg-brand"
                 />
                 Artisan French Bakery · Phuket
               </span>
@@ -157,169 +174,154 @@ export default function Hero() {
             <StaggerItem distance={28} duration={0.9}>
               <h1
                 id="hero-heading"
-                className="font-serif font-medium text-text tracking-tight text-[40px] leading-[1.04] sm:text-[56px] sm:leading-1.0 lg:text-[68px] lg:leading-[0.98]"
+                className="font-serif font-medium tracking-tight text-text text-[clamp(2.125rem,9.5vw,2.5rem)] leading-[1.08] sm:text-[clamp(2.5rem,5vw,3rem)] sm:leading-[1.06] lg:text-[clamp(2.375rem,3.4vw,2.625rem)] lg:leading-[1.05] xl:text-[3.125rem]"
               >
-                A Taste of France,
-                <span className="block text-brand italic mt-1">
+                A Taste of <br />
+                France,
+                <span className="mt-1.5 block text-[0.9em] italic text-brand whitespace-nowrap sm:mt-2">
                   Made in Phuket.
                 </span>
               </h1>
             </StaggerItem>
 
             <StaggerItem className="mt-7 sm:mt-8" distance={16}>
-              <p className="max-w-xl text-[15px] sm:text-[16px] leading-[1.75] text-muted">
-                Discover the craft of French baking through artisan breads and
-                delicate pastries — baked fresh every morning from our oven in
-                the heart of Phuket.
+              <p className="max-w-xl text-[15px] leading-[1.75] text-muted sm:text-[16px]">
+                Discover the art of baking through handcrafted croissants,
+                artisan breads, delicate pastries and freshly prepared coffee.
+                From everyday café favourites to thoughtfully prepared treats
+                for businesses and special occasions.
               </p>
             </StaggerItem>
 
             <StaggerItem
-              className="mt-9 sm:mt-11 w-full sm:w-auto"
+              className="mt-9 w-full sm:mt-11 sm:w-auto"
               distance={16}
             >
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+              <div className="flex w-full flex-col gap-3 sm:flex-row sm:gap-4">
                 <Link
                   href="/menu"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] sm:text-[15px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-[14px] font-semibold text-brand-contrast transition-all duration-200 hover:bg-brand-hover active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
                 >
                   Explore Our Menu
                   <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-8 py-4 text-[14px] sm:text-[15px] font-semibold text-text transition-all duration-200 hover:border-border-strong hover:bg-surface-alt active:translate-y-1px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-8 py-4 text-[14px] font-semibold text-text transition-all duration-200 hover:border-border-strong hover:bg-surface-alt active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:text-[15px]"
                 >
                   <MapPinIcon className="text-brand" />
                   Find Our Bakery
                 </Link>
               </div>
             </StaggerItem>
-
-            {/* <dl
-              className="hero-fade-up mt-12 sm:mt-14 grid grid-cols-3 gap-x-6 sm:gap-x-10 gap-y-6 w-full max-w-lg border-t border-border pt-7"
-              style={{ animationDelay: "0.72s" }}
-            >
-              <div>
-                <dt className="text-[11px] uppercase tracking-[0.24em] text-subtle font-semibold">
-                  Oven
-                </dt>
-                <dd className="mt-2 font-serif text-2xl sm:text-[28px] leading-none text-text">
-                  06<span className="text-brand">.</span>30
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[11px] uppercase tracking-[0.24em] text-subtle font-semibold">
-                  Ferment
-                </dt>
-                <dd className="mt-2 font-serif text-2xl sm:text-[28px] leading-none text-text">
-                  72<span className="text-brand">h</span>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[11px] uppercase tracking-[0.24em] text-subtle font-semibold">
-                  Flour
-                </dt>
-                <dd className="mt-2 font-serif text-2xl sm:text-[28px] leading-none text-text">
-                  T<span className="text-brand">65</span>
-                </dd>
-              </div>
-            </dl> */}
           </StaggerContainer>
 
-          <div className="lg:col-span-7 xl:col-span-7 relative">
+          {/* ——— RIGHT: product carousel ——— */}
+          <div className="relative lg:col-span-7">
             <Reveal effect="fade" delay={0.3}>
               <div
-                ref={regionRef}
                 role="region"
                 aria-roledescription="carousel"
-                aria-label="Teraboulanger brand imagery"
+                aria-label="Tera Boulanger product highlights"
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
-                className="focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-[20px]"
+                className="rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
-              <figure className="relative w-full">
-                <div className="relative aspect-4/3 w-full overflow-hidden rounded-[20px] border border-border bg-surface">
-                  {SLIDES.map((slide, index) => {
-                    const isActive = index === current;
-                    return (
-                      <div
-                        key={slide.src}
-                        data-slide={isActive}
-                        aria-hidden={!isActive}
-                        className={`absolute inset-0 transition-opacity duration-500 ease-out ${
-                          isActive
-                            ? "opacity-100"
-                            : "opacity-0 pointer-events-none"
-                        }`}
-                      >
-                        <Image
-                          src={slide.src}
-                          alt={slide.alt}
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 55vw"
-                          priority={index === 0}
-                          loading={index === 0 ? "eager" : "lazy"}
-                          className="object-cover object-center select-none"
-                          draggable={false}
-                        />
-                      </div>
-                    );
-                  })}
-
-                  <button
-                    type="button"
-                    onClick={goPrev}
-                    aria-label="Previous slide"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-bg/80 text-text backdrop-blur-sm transition-all duration-200 hover:bg-surface-alt hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                  >
-                    <ArrowLeftIcon />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goNext}
-                    aria-label="Next slide"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-bg/80 text-text backdrop-blur-sm transition-all duration-200 hover:bg-surface-alt hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                  >
-                    <ArrowRightIcon />
-                  </button>
-                </div>
-
-                <figcaption className="mt-4 flex items-start justify-between gap-4">
-                  <div aria-live="polite" className="min-w-0">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-brand font-semibold">
-                      {activeSlide.category}
-                    </p>
-                    <p className="mt-1 text-[14px] sm:text-[15px] text-text leading-snug">
-                      {activeSlide.caption}
-                    </p>
-                  </div>
-                  <div
-                    role="tablist"
-                    aria-label="Slide navigation"
-                    className="flex shrink-0 items-center gap-2 pt-1"
-                  >
+                <figure className="relative w-full">
+                  <div className="relative aspect-4/5 w-full overflow-hidden rounded-[20px] border border-border bg-surface sm:aspect-4/3">
                     {SLIDES.map((slide, index) => {
                       const isActive = index === current;
+                      const hasFailed = failedImages[slide.id];
                       return (
-                        <button
-                          key={`dot-${slide.src}`}
-                          type="button"
-                          role="tab"
-                          aria-selected={isActive}
-                          aria-label={`Go to slide ${index + 1}`}
-                          onClick={() => goTo(index)}
-                          className={`h-2 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
+                        <div
+                          key={slide.id}
+                          aria-hidden={!isActive}
+                          className={`absolute inset-0 transition-[opacity,transform] duration-700 ease-out ${
                             isActive
-                              ? "w-6 bg-brand"
-                              : "w-2 bg-border-strong hover:bg-subtle"
+                              ? "scale-100 opacity-100"
+                              : "pointer-events-none scale-[1.03] opacity-0"
                           }`}
-                        />
+                        >
+                          {/* Branded fallback — shown when the photo fails to load */}
+                          <div
+                            aria-hidden="true"
+                            className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-surface-alt bg-gradient-to-b from-brand/10 to-transparent px-8 text-center"
+                          >
+                            <span className="h-px w-10 bg-brand" />
+                            <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
+                              {slide.label}
+                            </span>
+                          </div>
+
+                          <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 55vw"
+                            priority={index === 0}
+                            loading={index === 0 ? "eager" : "lazy"}
+                            onError={() => markFailed(slide.id)}
+                            className={`select-none object-cover object-center transition-opacity duration-500 ${
+                              hasFailed ? "opacity-0" : "opacity-100"
+                            }`}
+                            draggable={false}
+                          />
+                        </div>
                       );
                     })}
+
+                    <button
+                      type="button"
+                      onClick={goPrev}
+                      aria-label="Show previous product"
+                      className="absolute left-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-bg/80 text-text backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface-alt focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    >
+                      <ArrowLeftIcon />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={goNext}
+                      aria-label="Show next product"
+                      className="absolute right-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-bg/80 text-text backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface-alt focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    >
+                      <ArrowRightIcon />
+                    </button>
                   </div>
-                </figcaption>
-              </figure>
+
+                  <figcaption className="mt-4 flex items-start justify-between gap-4 sm:mt-5">
+                    <div aria-live="polite" className="min-w-0">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand">
+                        {activeSlide.label}
+                      </p>
+                      <p className="mt-1 text-[14px] leading-snug text-text sm:text-[15px]">
+                        {activeSlide.caption}
+                      </p>
+                    </div>
+                    <div
+                      role="group"
+                      aria-label="Slide navigation"
+                      className="flex shrink-0 items-center gap-2 pt-1.5"
+                    >
+                      {SLIDES.map((slide, index) => {
+                        const isActive = index === current;
+                        return (
+                          <button
+                            key={`dot-${slide.id}`}
+                            type="button"
+                            aria-label={`Show slide ${index + 1}: ${slide.label}`}
+                            aria-current={isActive ? "true" : undefined}
+                            onClick={() => goTo(index)}
+                            className={`h-2 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
+                              isActive
+                                ? "w-7 bg-brand"
+                                : "w-2 bg-border-strong hover:bg-subtle"
+                            }`}
+                          />
+                        );
+                      })}
+                    </div>
+                  </figcaption>
+                </figure>
               </div>
             </Reveal>
           </div>
