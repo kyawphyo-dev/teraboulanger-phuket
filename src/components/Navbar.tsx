@@ -9,9 +9,8 @@ import AnimatedNavLink from "./navigation/AnimatedNavLink";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/menu", label: "Menu" },
-  { href: "/our-story", label: "Our Story" },
+  { href: "/about", label: "Our Story" },
   { href: "/contact", label: "Contact" },
 ];
 
